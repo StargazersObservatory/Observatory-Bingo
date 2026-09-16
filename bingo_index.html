@@ -1,22 +1,48 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
   <title>The Observatory Bingo</title>
+
   <link rel="stylesheet" href="bingo_style.css">
 </head>
+
 <body>
 
-  <main class="bingo-stage" aria-label="The Observatory Bingo game">
+  <main
+    class="bingo-stage"
+    aria-label="The Observatory Bingo game"
+  >
+
     <div class="game-overlay">
 
-      <!-- USERNAME INPUT -->
-      <section class="overlay-zone username-zone" id="usernameSection">
-        <form id="usernameForm" class="username-form">
 
-          <label class="sr-only" for="usernameInput">
+      <!-- =====================================
+           USERNAME INPUT
+      ====================================== -->
+
+      <section
+        class="overlay-zone username-zone"
+        id="usernameSection"
+      >
+
+        <form
+          id="usernameForm"
+          class="username-form"
+        >
+
+          <label
+            class="sr-only"
+            for="usernameInput"
+          >
             Twitch username
           </label>
 
@@ -29,67 +55,103 @@
             required
           >
 
-          <button type="submit" aria-label="Start Bingo">
+          <button
+            type="submit"
+            aria-label="Start Bingo"
+          >
             START
           </button>
 
         </form>
 
-        <p id="usernameError"
-           class="inline-message"
-           aria-live="polite">
-        </p>
+        <p
+          id="usernameError"
+          class="inline-message"
+          aria-live="polite"
+        ></p>
+
       </section>
 
 
-      <!-- PLAYER INFORMATION -->
+      <!-- =====================================
+           PLAYER INFORMATION
+      ====================================== -->
+
       <section
         class="overlay-zone player-zone hidden"
         id="playerInfo"
       >
 
-        <div id="playerNameDisplay" class="player-name">
+        <div
+          id="playerNameDisplay"
+          class="player-name"
+        >
           —
         </div>
 
-        <div id="cardNumber" class="card-number">
+        <div
+          id="cardNumber"
+          class="card-number"
+        >
           #1
         </div>
 
       </section>
 
 
-      <!-- LEFT SIDE CONTROLS -->
-      <section class="overlay-zone controls-zone">
+      <!-- =====================================
+           LEFT SIDE CONTROLS
+           BUTTON TEXT IS NOW IN HTML
+      ====================================== -->
+
+      <section
+        class="overlay-zone controls-zone"
+      >
 
         <button
           id="newCardButton"
-          class="zone-button"
+          class="zone-button new-card-button"
           type="button"
           disabled
           aria-label="Get a new Bingo card"
-        ></button>
+        >
+          <span class="button-icon">↻</span>
+          <span class="button-label">RESET CARD</span>
+        </button>
+
 
         <button
           id="clearButton"
-          class="zone-button"
+          class="zone-button clear-marks-button"
           type="button"
           disabled
           aria-label="Clear Bingo marks"
-        ></button>
+        >
+          <span class="button-icon">✎</span>
+          <span class="button-label">CLEAR MARKS</span>
+        </button>
+
 
         <button
           id="rulesButton"
-          class="zone-button"
+          class="zone-button how-to-button"
           type="button"
           aria-label="Show how to play"
-        ></button>
+        >
+          <span class="button-icon">📜</span>
+          <span class="button-label">HOW TO PLAY</span>
+        </button>
 
       </section>
 
 
-      <!-- CENTER BINGO CARD -->
-      <section class="overlay-zone card-zone">
+      <!-- =====================================
+           CENTER BINGO CARD
+      ====================================== -->
+
+      <section
+        class="overlay-zone card-zone"
+      >
 
         <p
           id="statusMessage"
@@ -98,6 +160,7 @@
         >
           Enter your Twitch username to begin.
         </p>
+
 
         <div
           id="bingoCard"
@@ -108,8 +171,10 @@
       </section>
 
 
-      <!-- RIGHT SIDE CLAIM AREA -->
-      <!-- Claim is done with !bingo in Twitch chat -->
+      <!-- =====================================
+           RIGHT SIDE CLAIM AREA
+           !bingo IS THE REDEEM COMMAND
+      ====================================== -->
 
       <section
         class="overlay-zone claim-zone"
@@ -124,15 +189,20 @@
           Complete a Bingo to unlock your claim.
         </p>
 
+
         <div
           id="claimResult"
           class="claim-result hidden"
           aria-live="polite"
         >
 
-          <strong id="claimFinalMessage"></strong>
+          <strong
+            id="claimFinalMessage"
+          ></strong>
 
-          <span id="claimChatCommand">
+          <span
+            id="claimChatCommand"
+          >
             !bingo
           </span>
 
@@ -141,7 +211,9 @@
       </section>
 
 
-      <!-- HOW TO PLAY PANEL -->
+      <!-- =====================================
+           HOW TO PLAY PANEL
+      ====================================== -->
 
       <section
         id="rulesPanel"
@@ -158,22 +230,35 @@
           ×
         </button>
 
+
         <h2>HOW TO PLAY</h2>
 
+
         <ol>
+
           <li>Watch the stream.</li>
+
           <li>Tap a square when it happens.</li>
+
           <li>Get 5 in a row in any direction.</li>
-          <li>Type <strong>!bingo</strong> in Twitch chat.</li>
+
+          <li>
+            Type <strong>!bingo</strong> in Twitch chat.
+          </li>
+
           <li>Have fun and embrace the chaos!</li>
+
         </ol>
 
       </section>
 
     </div>
+
   </main>
+
 
   <script src="bingo_app.js"></script>
 
 </body>
+
 </html>
