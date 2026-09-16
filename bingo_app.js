@@ -72,61 +72,110 @@ let currentCard = [];
 
 
 /* =====================================================
-   BINGO ITEMS
+   COMMUNITY NIGHT COP-CAM BINGO ITEMS
 ===================================================== */
 
 const bingoItems = [
 
-  ["🥒", "Pickle is mentioned"],
-  ["🏁", "A marbles race starts"],
-  ["🐿️", "A squirrel appears"],
-  ["🎮", "Someone uses !jumanji"],
-  ["🧸", "The claw grabs a prize"],
-  ["📚", "Homework is mentioned"],
-  ["🧪", "Pixie is mentioned"],
-  ["🛰️", "The Observatory is mentioned"],
-  ["🔊", "A sound alert plays"],
-  ["👽", "An alien appears"],
-  ["🚛", "American Truck Simulator is mentioned"],
-  ["💥", "Someone uses !bonk"],
-  ["🐻", "Yogi Bear is mentioned"],
-  ["🌌", "Someone says Cosmic Goblins"],
-  ["🦆", "The purple duck appears"],
-  ["🏆", "A marbles winner is announced"],
-  ["💬", "Someone says chat"],
-  ["🔧", "A technical issue happens"],
-  ["😴", "Someone uses !tigger"],
-  ["🎥", "A community video is suggested"],
-  ["😂", "Stargazer laughs"],
-  ["📖", "Tiny Book Shop is mentioned"],
-  ["🥒", "A pickle joke happens"],
-  ["⭐", "Someone gets a shoutout"],
-  ["🧸", "A plushie gets stuck"],
-  ["🎵", "The winners anthem plays"],
-  ["👻", "Someone uses !ghost"],
-  ["🐯", "Someone mentions Tigger"],
-  ["🚀", "Someone says one more"],
-  ["🛠️", "Something needs fixing"],
-  ["🌟", "A rare prize is found"],
-  ["📡", "A strange transmission happens"],
-  ["🪐", "A space joke happens"],
-  ["🎲", "Someone rolls the dice"],
-  ["💜", "A community member gets a shoutout"],
-  ["📢", "A stream alert interrupts"],
-  ["🤔", "Someone asks what happened"],
-  ["🌵", "A Texas reference happens"],
-  ["🎮", "A game bug happens"],
-  ["🛰️", "The Observatory needs fixing"],
-  ["👾", "A Cosmic Goblin is blamed"],
-  ["🎉", "Chat celebrates"],
-  ["💫", "Something unexpected happens"],
-  ["🗣️", "Someone says hold on"],
-  ["🎁", "A surprise reward happens"],
-  ["🌙", "Someone talks about being tired"],
-  ["📅", "The stream schedule is mentioned"],
-  ["🎬", "A classic clip is mentioned"],
-  ["🧑‍🚀", "Someone joins the crew"],
-  ["💎", "A legendary moment happens"]
+  ["🚓", "Police vehicle arrives"],
+
+  ["🚨", "Emergency lights are visible"],
+
+  ["📹", "Body cam footage starts"],
+
+  ["🎥", "Video cuts to a different camera"],
+
+  ["👮", "Officer introduces themselves"],
+
+  ["🗣️", "Officer gives a direct instruction"],
+
+  ["🙅", "Suspect refuses to follow instructions"],
+
+  ["🤔", "Suspect asks an obvious question"],
+
+  ["😡", "Suspect becomes angry"],
+
+  ["😭", "Suspect starts crying"],
+
+  ["😂", "Someone says something unbelievable"],
+
+  ["🤥", "Suspect gets caught lying"],
+
+  ["🔄", "Suspect changes their story"],
+
+  ["🚪", "Suspect refuses to leave"],
+
+  ["🏃", "Suspect tries to run"],
+
+  ["🚗", "Suspect attempts to leave in a vehicle"],
+
+  ["🚔", "Multiple officers arrive"],
+
+  ["🔦", "Officer searches a vehicle"],
+
+  ["🔍", "Evidence is discovered"],
+
+  ["📦", "Something suspicious is found"],
+
+  ["🧤", "Officer puts on gloves"],
+
+  ["🔒", "Suspect is placed under arrest"],
+
+  ["⛓️", "Handcuffs are used"],
+
+  ["🚑", "Medical attention is requested"],
+
+  ["🚒", "Fire department or EMS arrives"],
+
+  ["📞", "Someone calls 911"],
+
+  ["⚖️", "Judge or courtroom is mentioned"],
+
+  ["📋", "Charges are explained"],
+
+  ["📝", "Police report is mentioned"],
+
+  ["🪪", "Suspect has no identification"],
+
+  ["🚘", "Suspect is pulled over"],
+
+  ["💥", "Vehicle damage is discussed"],
+
+  ["🍺", "Alcohol is mentioned"],
+
+  ["💊", "Drugs or medication are mentioned"],
+
+  ["🔫", "A weapon is mentioned"],
+
+  ["🏠", "Suspect refuses to leave a home or business"],
+
+  ["👨‍👩‍👧", "Family member gets involved"],
+
+  ["📱", "A phone is used as evidence"],
+
+  ["🎙️", "Officer explains what happened"],
+
+  ["❓", "Someone asks why they are being detained"],
+
+  ["🧑‍⚖️", "Suspect asks for a lawyer"],
+
+  ["🗯️", "Suspect talks over the officer"],
+
+  ["📢", "Officer raises their voice"],
+
+  ["🤦", "Suspect makes the situation worse"],
+
+  ["🧠", "Suspect gives an unbelievable explanation"],
+
+  ["🛑", "Officer tells someone to stop"],
+
+  ["👀", "Suspect looks directly at the camera"],
+
+  ["🚶", "Suspect walks away from the officer"],
+
+  ["🔊", "A loud argument happens"],
+
+  ["🎬", "Video ends before the situation is resolved"]
 
 ];
 
