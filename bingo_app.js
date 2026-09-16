@@ -85,6 +85,11 @@ let currentCard = [];
    BINGO ITEMS
 ========================================= */
 
+/* =========================================
+   COMMUNITY NIGHT BINGO ITEMS
+   BODY CAM • ARREST VIDEOS • DUMB CRIMINALS
+========================================= */
+
 const bingoItems = [
 
   ["🚔", "Suspect gets pulled over"],
