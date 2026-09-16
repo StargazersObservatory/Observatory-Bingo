@@ -1,7 +1,5 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
 
@@ -24,10 +22,9 @@
 
     <div class="game-overlay">
 
-
-      <!-- =====================================
-           USERNAME INPUT
-      ====================================== -->
+      <!-- =========================================
+           USERNAME SECTION
+      ========================================== -->
 
       <section
         class="overlay-zone username-zone"
@@ -73,9 +70,9 @@
       </section>
 
 
-      <!-- =====================================
+      <!-- =========================================
            PLAYER INFORMATION
-      ====================================== -->
+      ========================================== -->
 
       <section
         class="overlay-zone player-zone hidden"
@@ -99,10 +96,10 @@
       </section>
 
 
-      <!-- =====================================
-           LEFT SIDE CONTROLS
-           BUTTON TEXT IS NOW IN HTML
-      ====================================== -->
+      <!-- =========================================
+           LEFT BUTTONS
+           Button text is supplied by HTML
+      ========================================== -->
 
       <section
         class="overlay-zone controls-zone"
@@ -110,44 +107,44 @@
 
         <button
           id="newCardButton"
-          class="zone-button new-card-button"
+          class="zone-button"
           type="button"
           disabled
           aria-label="Get a new Bingo card"
         >
-          <span class="button-icon">↻</span>
-          <span class="button-label">RESET CARD</span>
+          <span class="button-icon">🎲</span>
+          <span class="button-label">NEW CARD</span>
         </button>
 
 
         <button
           id="clearButton"
-          class="zone-button clear-marks-button"
+          class="zone-button"
           type="button"
           disabled
           aria-label="Clear Bingo marks"
         >
-          <span class="button-icon">✎</span>
-          <span class="button-label">CLEAR MARKS</span>
+          <span class="button-icon">🧹</span>
+          <span class="button-label">CLEAR</span>
         </button>
 
 
         <button
           id="rulesButton"
-          class="zone-button how-to-button"
+          class="zone-button"
           type="button"
           aria-label="Show how to play"
         >
-          <span class="button-icon">📜</span>
+          <span class="button-icon">📖</span>
           <span class="button-label">HOW TO PLAY</span>
         </button>
 
       </section>
 
 
-      <!-- =====================================
+      <!-- =========================================
            CENTER BINGO CARD
-      ====================================== -->
+      ========================================== -->
 
       <section
         class="overlay-zone card-zone"
@@ -161,7 +158,6 @@
           Enter your Twitch username to begin.
         </p>
 
-
         <div
           id="bingoCard"
           class="bingo-card"
@@ -171,10 +167,10 @@
       </section>
 
 
-      <!-- =====================================
-           RIGHT SIDE CLAIM AREA
-           !bingo IS THE REDEEM COMMAND
-      ====================================== -->
+      <!-- =========================================
+           CLAIM AREA
+           Claim is done with !bingo in Twitch chat
+      ========================================== -->
 
       <section
         class="overlay-zone claim-zone"
@@ -188,7 +184,6 @@
         >
           Complete a Bingo to unlock your claim.
         </p>
-
 
         <div
           id="claimResult"
@@ -211,9 +206,9 @@
       </section>
 
 
-      <!-- =====================================
-           HOW TO PLAY PANEL
-      ====================================== -->
+      <!-- =========================================
+           HOW TO PLAY BOX
+      ========================================== -->
 
       <section
         id="rulesPanel"
@@ -230,24 +225,14 @@
           ×
         </button>
 
-
         <h2>HOW TO PLAY</h2>
 
-
         <ol>
-
           <li>Watch the stream.</li>
-
           <li>Tap a square when it happens.</li>
-
           <li>Get 5 in a row in any direction.</li>
-
-          <li>
-            Type <strong>!bingo</strong> in Twitch chat.
-          </li>
-
+          <li>Type <strong>!bingo</strong> in Twitch chat.</li>
           <li>Have fun and embrace the chaos!</li>
-
         </ol>
 
       </section>
@@ -257,8 +242,8 @@
   </main>
 
 
+  <!-- KEEP YOUR EXISTING JAVASCRIPT FILE -->
   <script src="bingo_app.js"></script>
 
 </body>
-
 </html>
