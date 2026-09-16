@@ -1,6 +1,6 @@
 /* =========================================
    THE OBSERVATORY BINGO
-   COMPLETE ALIGNMENT + SMALLER TEXT FIX
+   SPACING + SMALLER TEXT + BLANK FREE SPACE
 ========================================= */
 
 * {
@@ -9,10 +9,10 @@
 
 html,
 body {
-  margin: 0;
-  padding: 0;
   width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
   background: #000;
   font-family: Arial, Helvetica, sans-serif;
@@ -25,11 +25,12 @@ body {
 }
 
 /* =========================================
-   MAIN BACKGROUND
+   BACKGROUND STAGE
 ========================================= */
 
 .bingo-stage {
   position: relative;
+
   width: min(100vw, 1402px);
   aspect-ratio: 1402 / 1122;
 
@@ -43,40 +44,42 @@ body {
 }
 
 /* =========================================
-   OVERLAY LAYER
+   OVERLAY
 ========================================= */
 
 .game-overlay {
   position: absolute;
   inset: 0;
+
   width: 100%;
   height: 100%;
+
   pointer-events: none;
 }
 
 /* =========================================
-   BINGO CARD POSITION
+   CARD POSITION
 ========================================= */
 
 .card-zone {
   position: absolute;
 
   /*
-    These percentages place the card over
-    the five background columns and rows.
+    Slightly smaller than the background area
+    so the buttons do not touch each other.
   */
 
-  left: 28.2%;
-  top: 33.9%;
-  width: 42.8%;
-  height: 49.4%;
+  left: 28.45%;
+  top: 34.25%;
+  width: 42.25%;
+  height: 48.65%;
 
   padding: 0;
   margin: 0;
 }
 
 /* =========================================
-   BINGO GRID
+   GRID
 ========================================= */
 
 .bingo-card {
@@ -84,19 +87,26 @@ body {
   inset: 0;
 
   display: grid;
+
   grid-template-columns: repeat(5, minmax(0, 1fr));
   grid-template-rows: repeat(5, minmax(0, 1fr));
 
-  gap: 4px;
+  /*
+    Increased spacing between all buttons.
+  */
+
+  column-gap: 8px;
+  row-gap: 8px;
 
   width: 100%;
   height: 100%;
-  margin: 0;
+
   padding: 0;
+  margin: 0;
 }
 
 /* =========================================
-   BINGO SQUARES
+   BINGO BUTTONS
 ========================================= */
 
 .bingo-square,
@@ -114,7 +124,12 @@ body {
   width: 100%;
   height: 100%;
 
-  padding: 3px 4px;
+  /*
+    Smaller inner padding prevents text
+    from crowding the edges.
+  */
+
+  padding: 3px 5px;
   margin: 0;
 
   border-radius: 10px;
@@ -123,25 +138,14 @@ body {
   text-align: center;
   line-height: 1.05;
 
-  background: rgba(0, 22, 95, 0.72);
+  background: rgba(0, 22, 95, 0.78);
   border: 2px solid rgba(70, 110, 255, 0.95);
+
   box-shadow:
     0 0 5px rgba(0, 85, 255, 0.9),
     inset 0 0 8px rgba(0, 0, 255, 0.3);
 
   pointer-events: auto;
-}
-
-/* Keep the free space highlighted */
-
-.bingo-square.free-space,
-.square.free-space,
-.free-space {
-  background: rgba(35, 0, 90, 0.9);
-  border-color: #ff49ff;
-  box-shadow:
-    0 0 8px #ff28ff,
-    inset 0 0 12px rgba(255, 0, 255, 0.4);
 }
 
 /* =========================================
@@ -158,17 +162,17 @@ body {
   margin: 0 0 2px 0;
   padding: 0;
 
-  font-size: clamp(13px, 1.25vw, 21px);
+  font-size: clamp(11px, 1.05vw, 17px);
   line-height: 1;
 
   text-align: center;
 
-  overflow: hidden;
   white-space: nowrap;
+  overflow: hidden;
 }
 
 /* =========================================
-   SQUARE WORDS
+   SMALLER WORDS
 ========================================= */
 
 .square-text,
@@ -184,34 +188,79 @@ body {
 
   color: #fff;
 
-  font-size: clamp(7px, 0.62vw, 11px);
+  /*
+    Smaller than the previous version.
+  */
+
+  font-size: clamp(6px, 0.53vw, 9px);
   font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -0.2px;
+  line-height: 1.03;
+  letter-spacing: -0.25px;
 
   text-align: center;
+
   text-shadow:
     1px 1px 0 #1724a5,
     -1px -1px 0 #1724a5,
     0 0 3px #000;
 
   overflow: hidden;
-  word-break: normal;
   overflow-wrap: anywhere;
+  word-break: normal;
 
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
 }
 
-/* Alternate text class names */
+/* Prevent any child text from becoming too large */
 
-.square span,
-.bingo-square span {
+.bingo-square span,
+.square span {
   max-width: 100%;
+  font-size: inherit;
+  line-height: inherit;
 }
 
 /* =========================================
-   CLAIMED / MARKED SQUARES
+   BLANK FREE SPACE
+========================================= */
+
+/*
+  This hides the icon and all words in the
+  center square, leaving only a clear button.
+*/
+
+.bingo-square.free-space,
+.square.free-space,
+.free-space {
+  background: rgba(35, 0, 90, 0.9);
+  border-color: #ff49ff;
+
+  box-shadow:
+    0 0 9px #ff28ff,
+    inset 0 0 12px rgba(255, 0, 255, 0.4);
+}
+
+/* Hide every visible item inside FREE SPACE */
+
+.bingo-square.free-space *,
+.square.free-space *,
+.free-space * {
+  display: none !important;
+}
+
+/* Keep the free-space button itself visible */
+
+.bingo-square.free-space,
+.square.free-space,
+.free-space {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =========================================
+   CLAIMED SQUARES
 ========================================= */
 
 .bingo-square.claimed,
@@ -233,35 +282,27 @@ body {
   content: "✓";
 
   position: absolute;
-  right: 3px;
   top: 2px;
+  right: 3px;
 
   color: #9affaa;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 900;
 }
 
 /* =========================================
-   BUTTONS
+   OTHER BUTTONS
 ========================================= */
-
-button,
-.zone-button,
-.action-button {
-  font-family: Arial, Helvetica, sans-serif;
-  cursor: pointer;
-}
 
 .zone-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
 
   min-width: 0;
   min-height: 0;
 
-  padding: 5px 8px;
+  padding: 4px 7px;
 
   color: #fff;
   background: rgba(0, 25, 100, 0.9);
@@ -269,32 +310,32 @@ button,
   border: 2px solid #5577ff;
   border-radius: 9px;
 
-  font-size: clamp(9px, 0.8vw, 13px);
+  font-size: clamp(8px, 0.7vw, 11px);
   font-weight: 800;
+  line-height: 1.05;
   text-align: center;
-  line-height: 1.1;
 
   box-shadow: 0 0 6px rgba(60, 100, 255, 0.8);
 }
 
 .button-icon {
-  font-size: clamp(14px, 1.4vw, 22px);
+  font-size: clamp(12px, 1.1vw, 18px);
   line-height: 1;
 }
 
 .button-label {
-  font-size: clamp(9px, 0.75vw, 12px);
-  line-height: 1.1;
+  font-size: clamp(8px, 0.65vw, 11px);
+  line-height: 1.05;
 }
 
 /* =========================================
-   HEADER / TITLE TEXT
+   HEADER AND INSTRUCTIONS
 ========================================= */
 
 .title,
 .bingo-title,
 .header-title {
-  font-size: clamp(18px, 2.2vw, 34px);
+  font-size: clamp(18px, 2vw, 30px);
   line-height: 1;
   text-align: center;
 }
@@ -302,8 +343,8 @@ button,
 .subtitle,
 .instructions,
 .instruction-text {
-  font-size: clamp(8px, 0.75vw, 13px);
-  line-height: 1.15;
+  font-size: clamp(7px, 0.65vw, 11px);
+  line-height: 1.05;
   text-align: center;
 }
 
@@ -312,19 +353,19 @@ button,
 ========================================= */
 
 .status-message {
-  font-size: clamp(8px, 0.75vw, 12px);
-  line-height: 1.1;
+  font-size: clamp(7px, 0.65vw, 11px);
+  line-height: 1.05;
   text-align: center;
 }
 
 .claim-status {
-  font-size: clamp(9px, 0.85vw, 13px);
-  line-height: 1.1;
+  font-size: clamp(8px, 0.7vw, 12px);
+  line-height: 1.05;
   text-align: center;
 }
 
 /* =========================================
-   HIDE UNNECESSARY CONNECTING BOX
+   HIDE CONNECTION BOX
 ========================================= */
 
 .connecting-box,
@@ -336,37 +377,38 @@ button,
 }
 
 /* =========================================
-   MOBILE / SMALL OBS PREVIEW
+   SMALLER PREVIEW WINDOWS
 ========================================= */
 
 @media (max-width: 900px) {
   .card-zone {
-    left: 28.2%;
-    top: 33.9%;
-    width: 42.8%;
-    height: 49.4%;
+    left: 28.45%;
+    top: 34.25%;
+    width: 42.25%;
+    height: 48.65%;
   }
 
   .bingo-card {
-    gap: 3px;
+    column-gap: 5px;
+    row-gap: 5px;
   }
 
   .bingo-square,
   .square {
     padding: 2px 3px;
-    border-radius: 7px;
+    border-radius: 8px;
     border-width: 1px;
   }
 
   .square-icon,
   .bingo-icon {
-    font-size: clamp(9px, 1.5vw, 16px);
+    font-size: clamp(8px, 1.25vw, 14px);
   }
 
   .square-text,
   .bingo-text,
   .square-label {
-    font-size: clamp(5px, 0.72vw, 9px);
+    font-size: clamp(5px, 0.62vw, 8px);
     line-height: 1;
     -webkit-line-clamp: 4;
   }
