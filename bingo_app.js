@@ -87,108 +87,105 @@ let currentCard = [];
 
 const bingoItems = [
 
-  ["🥒", "Pickle is mentioned"],
+  ["🚔", "Suspect gets pulled over"],
 
-  ["🏁", "A marbles race starts"],
+  ["👮", "Officer says step out of the vehicle"],
 
-  ["🐿️", "A squirrel appears"],
+  ["🗣️", "Suspect argues with the officer"],
 
-  ["🎮", "Someone uses !jumanji"],
+  ["🤥", "Suspect gets caught lying"],
 
-  ["🧸", "The claw grabs a prize"],
+  ["😂", "Suspect says something incriminating"],
 
-  ["📚", "Homework is mentioned"],
+  ["🤡", "Suspect gives an unbelievable excuse"],
 
-  ["🧪", "Pixie is mentioned"],
+  ["💀", "Suspect makes the situation worse"],
 
-  ["🛰️", "The Observatory is mentioned"],
+  ["🧠", "Suspect tries to outsmart the officer"],
 
-  ["🔊", "A sound alert plays"],
+  ["🏃", "Suspect tries to run"],
 
-  ["👽", "An alien appears"],
+  ["⛓️", "Suspect gets handcuffed"],
 
-  ["🚛", "American Truck Simulator is mentioned"],
+  ["🚓", "Multiple officers arrive"],
 
-  ["💥", "Someone uses !bonk"],
+  ["🔍", "Officer searches a vehicle"],
 
-  ["🐻", "Yogi Bear is mentioned"],
+  ["🪪", "Suspect has no license"],
 
-  ["🌌", "Someone says Cosmic Goblins"],
+  ["📋", "Officer asks for identification"],
 
-  ["🦆", "The purple duck appears"],
+  ["🚗", "Suspect crashes or damages a vehicle"],
 
-  ["🏆", "A marbles winner is announced"],
+  ["🗯️", "Suspect talks themselves into an arrest"],
 
-  ["💬", "Someone says chat"],
+  ["🤦", "Officer calls out a contradiction"],
 
-  ["🔧", "A technical issue happens"],
+  ["🤔", "Suspect asks an obvious question"],
 
-  ["😴", "Someone uses !tigger"],
+  ["🎭", "Suspect changes their story"],
 
-  ["🎥", "A community video is suggested"],
+  ["📱", "Suspect records the officer"],
 
-  ["😂", "Stargazer laughs"],
+  ["🛑", "Suspect refuses to follow instructions"],
 
-  ["📖", "Tiny Book Shop is mentioned"],
+  ["🚨", "Police lights are visible"],
 
-  ["🥒", "A pickle joke happens"],
+  ["🔊", "Officer tells someone to calm down"],
 
-  ["⭐", "Someone gets a shoutout"],
+  ["📢", "Suspect raises their voice"],
 
-  ["🧸", "A plushie gets stuck"],
+  ["😡", "Suspect becomes angry"],
 
-  ["🎵", "The winners anthem plays"],
+  ["😢", "Suspect becomes emotional"],
 
-  ["👻", "Someone uses !ghost"],
+  ["🤐", "Suspect refuses to answer"],
 
-  ["🐯", "Someone mentions Tigger"],
+  ["🚪", "Suspect is removed from a vehicle"],
 
-  ["🚀", "Someone says one more"],
+  ["🔐", "Suspect is placed under arrest"],
 
-  ["🛠️", "Something needs fixing"],
+  ["🧾", "Charges are explained"],
 
-  ["🌟", "A rare prize is found"],
+  ["⚖️", "Officer explains the law"],
 
-  ["📡", "A strange transmission happens"],
+  ["🧑‍⚖️", "Judge or courtroom is mentioned"],
 
-  ["🪐", "A space joke happens"],
+  ["💰", "Bail is discussed"],
 
-  ["🎲", "Someone rolls the dice"],
+  ["🚑", "Medical attention is requested"],
 
-  ["💜", "A community member gets a shoutout"],
+  ["🏠", "Police enter or approach a home"],
 
-  ["📢", "A stream alert interrupts"],
+  ["☎️", "Someone calls 911"],
 
-  ["🤔", "Someone asks what happened"],
+  ["🎤", "Narrator explains what went wrong"],
 
-  ["🌵", "A Texas reference happens"],
+  ["📺", "Video cuts to a different incident"],
 
-  ["🎮", "A game bug happens"],
+  ["⏪", "A moment gets replayed"],
 
-  ["🛰️", "The Observatory needs fixing"],
+  ["😂", "Commentary makes the situation funnier"],
 
-  ["👾", "A Cosmic Goblin is blamed"],
+  ["🤔", "Narrator asks what the suspect was thinking"],
 
-  ["🎉", "Chat celebrates"],
+  ["🚨", "Narrator points out a major red flag"],
 
-  ["💫", "Something unexpected happens"],
+  ["🎬", "A dramatic moment happens"],
 
-  ["🗣️", "Someone says hold on"],
+  ["👀", "A bystander gets involved"],
 
-  ["🎁", "A surprise reward happens"],
+  ["🔍", "Evidence is discussed"],
 
-  ["🌙", "Someone talks about being tired"],
+  ["📝", "Police report is mentioned"],
 
-  ["📅", "The stream schedule is mentioned"],
+  ["🎥", "Body cam footage starts"],
 
-  ["🎬", "A classic clip is mentioned"],
+  ["💬", "Chat reacts to something in the video"],
 
-  ["🧑‍🚀", "Someone joins the crew"],
-
-  ["💎", "A legendary moment happens"]
+  ["⭐", "A community member gets a shoutout"]
 
 ];
-
 
 /* =========================================
    SHUFFLE
