@@ -1,15 +1,14 @@
-
 "use strict";
 
-/* =========================================
+/* =====================================================
    THE OBSERVATORY BINGO
-   GAME LOGIC
-========================================= */
+   COMPLETE GAME LOGIC
+===================================================== */
 
 
-/* =========================================
+/* =====================================================
    ELEMENTS
-========================================= */
+===================================================== */
 
 const bingoCard =
   document.getElementById("bingoCard");
@@ -26,15 +25,6 @@ const newCardButton =
 const clearButton =
   document.getElementById("clearButton");
 
-const rulesButton =
-  document.getElementById("rulesButton");
-
-const closeRulesButton =
-  document.getElementById("closeRulesButton");
-
-const rulesPanel =
-  document.getElementById("rulesPanel");
-
 const playerForm =
   document.getElementById("usernameForm");
 
@@ -47,11 +37,11 @@ const usernameMessage =
 const playerSetup =
   document.getElementById("usernameSection");
 
+const activeUsernameBox =
+  document.getElementById("activeUsernameBox");
+
 const playerInfo =
   document.getElementById("playerInfo");
-
-const activeUsername =
-  document.getElementById("playerNameDisplay");
 
 const claimStatus =
   document.getElementById("claimStatus");
@@ -66,9 +56,9 @@ const claimFinalMessage =
   document.getElementById("claimFinalMessage");
 
 
-/* =========================================
+/* =====================================================
    GAME STATE
-========================================= */
+===================================================== */
 
 let playerUsername = "";
 
@@ -81,126 +71,79 @@ let cardNumber = 1;
 let currentCard = [];
 
 
-/* =========================================
+/* =====================================================
    BINGO ITEMS
-========================================= */
-
-/* =========================================
-   COMMUNITY NIGHT BINGO ITEMS
-   BODY CAM • ARREST VIDEOS • DUMB CRIMINALS
-========================================= */
+===================================================== */
 
 const bingoItems = [
 
-  ["🚔", "Suspect gets pulled over"],
-
-  ["👮", "Officer says step out of the vehicle"],
-
-  ["🗣️", "Suspect argues with the officer"],
-
-  ["🤥", "Suspect gets caught lying"],
-
-  ["😂", "Suspect says something incriminating"],
-
-  ["🤡", "Suspect gives an unbelievable excuse"],
-
-  ["💀", "Suspect makes the situation worse"],
-
-  ["🧠", "Suspect tries to outsmart the officer"],
-
-  ["🏃", "Suspect tries to run"],
-
-  ["⛓️", "Suspect gets handcuffed"],
-
-  ["🚓", "Multiple officers arrive"],
-
-  ["🔍", "Officer searches a vehicle"],
-
-  ["🪪", "Suspect has no license"],
-
-  ["📋", "Officer asks for identification"],
-
-  ["🚗", "Suspect crashes or damages a vehicle"],
-
-  ["🗯️", "Suspect talks themselves into an arrest"],
-
-  ["🤦", "Officer calls out a contradiction"],
-
-  ["🤔", "Suspect asks an obvious question"],
-
-  ["🎭", "Suspect changes their story"],
-
-  ["📱", "Suspect records the officer"],
-
-  ["🛑", "Suspect refuses to follow instructions"],
-
-  ["🚨", "Police lights are visible"],
-
-  ["🔊", "Officer tells someone to calm down"],
-
-  ["📢", "Suspect raises their voice"],
-
-  ["😡", "Suspect becomes angry"],
-
-  ["😢", "Suspect becomes emotional"],
-
-  ["🤐", "Suspect refuses to answer"],
-
-  ["🚪", "Suspect is removed from a vehicle"],
-
-  ["🔐", "Suspect is placed under arrest"],
-
-  ["🧾", "Charges are explained"],
-
-  ["⚖️", "Officer explains the law"],
-
-  ["🧑‍⚖️", "Judge or courtroom is mentioned"],
-
-  ["💰", "Bail is discussed"],
-
-  ["🚑", "Medical attention is requested"],
-
-  ["🏠", "Police enter or approach a home"],
-
-  ["☎️", "Someone calls 911"],
-
-  ["🎤", "Narrator explains what went wrong"],
-
-  ["📺", "Video cuts to a different incident"],
-
-  ["⏪", "A moment gets replayed"],
-
-  ["😂", "Commentary makes the situation funnier"],
-
-  ["🤔", "Narrator asks what the suspect was thinking"],
-
-  ["🚨", "Narrator points out a major red flag"],
-
-  ["🎬", "A dramatic moment happens"],
-
-  ["👀", "A bystander gets involved"],
-
-  ["🔍", "Evidence is discussed"],
-
-  ["📝", "Police report is mentioned"],
-
-  ["🎥", "Body cam footage starts"],
-
-  ["💬", "Chat reacts to something in the video"],
-
-  ["⭐", "A community member gets a shoutout"]
+  ["🥒", "Pickle is mentioned"],
+  ["🏁", "A marbles race starts"],
+  ["🐿️", "A squirrel appears"],
+  ["🎮", "Someone uses !jumanji"],
+  ["🧸", "The claw grabs a prize"],
+  ["📚", "Homework is mentioned"],
+  ["🧪", "Pixie is mentioned"],
+  ["🛰️", "The Observatory is mentioned"],
+  ["🔊", "A sound alert plays"],
+  ["👽", "An alien appears"],
+  ["🚛", "American Truck Simulator is mentioned"],
+  ["💥", "Someone uses !bonk"],
+  ["🐻", "Yogi Bear is mentioned"],
+  ["🌌", "Someone says Cosmic Goblins"],
+  ["🦆", "The purple duck appears"],
+  ["🏆", "A marbles winner is announced"],
+  ["💬", "Someone says chat"],
+  ["🔧", "A technical issue happens"],
+  ["😴", "Someone uses !tigger"],
+  ["🎥", "A community video is suggested"],
+  ["😂", "Stargazer laughs"],
+  ["📖", "Tiny Book Shop is mentioned"],
+  ["🥒", "A pickle joke happens"],
+  ["⭐", "Someone gets a shoutout"],
+  ["🧸", "A plushie gets stuck"],
+  ["🎵", "The winners anthem plays"],
+  ["👻", "Someone uses !ghost"],
+  ["🐯", "Someone mentions Tigger"],
+  ["🚀", "Someone says one more"],
+  ["🛠️", "Something needs fixing"],
+  ["🌟", "A rare prize is found"],
+  ["📡", "A strange transmission happens"],
+  ["🪐", "A space joke happens"],
+  ["🎲", "Someone rolls the dice"],
+  ["💜", "A community member gets a shoutout"],
+  ["📢", "A stream alert interrupts"],
+  ["🤔", "Someone asks what happened"],
+  ["🌵", "A Texas reference happens"],
+  ["🎮", "A game bug happens"],
+  ["🛰️", "The Observatory needs fixing"],
+  ["👾", "A Cosmic Goblin is blamed"],
+  ["🎉", "Chat celebrates"],
+  ["💫", "Something unexpected happens"],
+  ["🗣️", "Someone says hold on"],
+  ["🎁", "A surprise reward happens"],
+  ["🌙", "Someone talks about being tired"],
+  ["📅", "The stream schedule is mentioned"],
+  ["🎬", "A classic clip is mentioned"],
+  ["🧑‍🚀", "Someone joins the crew"],
+  ["💎", "A legendary moment happens"]
 
 ];
 
-/* =========================================
+
+/* =====================================================
    SHUFFLE
-========================================= */
+===================================================== */
 
 function shuffle(array) {
 
   const copy = [...array];
 
-  for (let i = copy.length - 1; i > 0; i--) {
+  for (
+    let i = copy.length - 1;
+    i > 0;
+    i--
+  ) {
 
     const randomIndex =
       Math.floor(Math.random() * (i + 1));
@@ -220,9 +163,9 @@ function shuffle(array) {
 }
 
 
-/* =========================================
+/* =====================================================
    USERNAME REQUIREMENT
-========================================= */
+===================================================== */
 
 function requireUsername() {
 
@@ -238,30 +181,26 @@ function requireUsername() {
 }
 
 
-/* =========================================
+/* =====================================================
    ENABLE / DISABLE CONTROLS
-========================================= */
+===================================================== */
 
 function setCardControlsEnabled(enabled) {
 
   if (newCardButton) {
-
     newCardButton.disabled = !enabled;
-
   }
 
   if (clearButton) {
-
     clearButton.disabled = !enabled;
-
   }
 
 }
 
 
-/* =========================================
-   RESET CLAIM
-========================================= */
+/* =====================================================
+   RESET CLAIM INFORMATION
+===================================================== */
 
 function resetClaimInformation() {
 
@@ -277,23 +216,20 @@ function resetClaimInformation() {
   claimResult?.classList.add("hidden");
 
   if (claimFinalMessage) {
-
     claimFinalMessage.textContent = "";
-
   }
 
   if (claimChatCommand) {
-
     claimChatCommand.textContent = "!bingo";
-
   }
 
 }
 
 
-/* =========================================
-   UNLOCK BINGO CLAIM
-========================================= */
+/* =====================================================
+   UNLOCK CLAIM
+   MESSAGE APPEARS IN YELLOW BOX
+===================================================== */
 
 function unlockClaim() {
 
@@ -315,12 +251,16 @@ function unlockClaim() {
 
   }
 
+  if (claimChatCommand) {
+    claimChatCommand.textContent = "!bingo";
+  }
+
 }
 
 
-/* =========================================
+/* =====================================================
    CREATE NEW CARD
-========================================= */
+===================================================== */
 
 function createNewCard() {
 
@@ -332,31 +272,34 @@ function createNewCard() {
 
   }
 
-
   currentCard =
     shuffle(bingoItems)
       .slice(0, 24)
-      .map(item => ({
+      .map(item => {
 
-        icon: item[0],
+        return {
 
-        text: item[1],
+          icon: item[0],
 
-        freeSpace: false
+          text: item[1],
 
-      }));
+          freeSpace: false
+
+        };
+
+      });
 
 
   /*
-    Insert FREE SPACE into center.
-    Index 12 = center of 5x5 card.
+    Center square is FREE SPACE.
+    Index 12 is the center of a 5 x 5 card.
   */
 
   currentCard.splice(12, 0, {
 
-    icon: "🌌",
+    icon: "",
 
-    text: "FREE SPACE",
+    text: "",
 
     freeSpace: true
 
@@ -371,15 +314,19 @@ function createNewCard() {
   if (cardNumberDisplay) {
 
     cardNumberDisplay.textContent =
-      `#${cardNumber}`;
+      `CARD #${cardNumber}`;
 
   }
 
 
+  /*
+    The instructions above the card are hidden.
+    The Bingo message belongs in the yellow box.
+  */
+
   if (statusMessage) {
 
-    statusMessage.textContent =
-      "Tap a square when the moment happens!";
+    statusMessage.textContent = "";
 
     statusMessage.classList.remove("bingo");
 
@@ -388,9 +335,9 @@ function createNewCard() {
 }
 
 
-/* =========================================
+/* =====================================================
    RENDER CARD
-========================================= */
+===================================================== */
 
 function renderCard() {
 
@@ -406,12 +353,17 @@ function renderCard() {
 
     square.type = "button";
 
-    square.className = "bingo-square";
+    square.className =
+      "bingo-square";
+
 
     square.setAttribute(
       "aria-label",
-      item.text
+      item.freeSpace
+        ? "Free space"
+        : item.text
     );
+
 
     square.dataset.marked =
       String(item.freeSpace);
@@ -420,24 +372,25 @@ function renderCard() {
     const icon =
       document.createElement("span");
 
-    icon.className = "square-icon";
+    icon.className =
+      "square-icon";
 
-    icon.textContent = item.icon;
+    icon.textContent =
+      item.icon;
 
 
     const text =
       document.createElement("span");
 
-    text.className = "square-text";
+    text.className =
+      "square-text";
 
-    text.textContent = item.text;
-
-
-    square.append(icon, text);
+    text.textContent =
+      item.text;
 
 
     /*
-      FREE SPACE IS AUTOMATICALLY MARKED.
+      FREE SPACE HAS NO WORDS OR ICON.
     */
 
     if (item.freeSpace) {
@@ -447,48 +400,56 @@ function renderCard() {
         "marked"
       );
 
+    } else {
+
+      square.append(
+        icon,
+        text
+      );
+
     }
 
 
     /*
-      CLICK TO MARK / UNMARK.
+      CLICK TO MARK / UNMARK
     */
 
-    square.addEventListener("click", () => {
+    square.addEventListener(
+      "click",
+      () => {
 
-      if (!playerHasEnteredName) {
+        if (!playerHasEnteredName) {
 
-        requireUsername();
+          requireUsername();
 
-        return;
+          return;
+
+        }
+
+
+        if (item.freeSpace) {
+          return;
+        }
+
+
+        const marked =
+          square.dataset.marked === "true";
+
+
+        square.dataset.marked =
+          String(!marked);
+
+
+        square.classList.toggle(
+          "marked",
+          !marked
+        );
+
+
+        checkForBingo();
 
       }
-
-
-      if (item.freeSpace) {
-
-        return;
-
-      }
-
-
-      const marked =
-        square.dataset.marked === "true";
-
-
-      square.dataset.marked =
-        String(!marked);
-
-
-      square.classList.toggle(
-        "marked",
-        !marked
-      );
-
-
-      checkForBingo();
-
-    });
+    );
 
 
     bingoCard.appendChild(square);
@@ -498,14 +459,20 @@ function renderCard() {
 }
 
 
-/* =========================================
+/* =====================================================
    GET MARKED SQUARES
-========================================= */
+===================================================== */
 
 function getMarkedSquares() {
 
+  if (!bingoCard) {
+    return [];
+  }
+
   return [
-    ...bingoCard.querySelectorAll(".bingo-square")
+    ...bingoCard.querySelectorAll(
+      ".bingo-square"
+    )
   ].map(square => {
 
     return square.dataset.marked === "true";
@@ -515,13 +482,15 @@ function getMarkedSquares() {
 }
 
 
-/* =========================================
+/* =====================================================
    CHECK FOR BINGO
-========================================= */
+===================================================== */
 
 function checkForBingo() {
 
-  if (!playerHasEnteredName) return;
+  if (!playerHasEnteredName) {
+    return;
+  }
 
 
   const marked =
@@ -530,7 +499,7 @@ function checkForBingo() {
 
   const winningLines = [
 
-    // ROWS
+    /* ROWS */
 
     [0, 1, 2, 3, 4],
 
@@ -543,7 +512,7 @@ function checkForBingo() {
     [20, 21, 22, 23, 24],
 
 
-    // COLUMNS
+    /* COLUMNS */
 
     [0, 5, 10, 15, 20],
 
@@ -556,7 +525,7 @@ function checkForBingo() {
     [4, 9, 14, 19, 24],
 
 
-    // DIAGONALS
+    /* DIAGONALS */
 
     [0, 6, 12, 18, 24],
 
@@ -568,7 +537,9 @@ function checkForBingo() {
   const hasBingo =
     winningLines.some(line => {
 
-      return line.every(index => marked[index]);
+      return line.every(index => {
+        return marked[index];
+      });
 
     });
 
@@ -576,15 +547,6 @@ function checkForBingo() {
   if (hasBingo) {
 
     if (!playerHasBingo) {
-
-      if (statusMessage) {
-
-        statusMessage.textContent =
-          "🎉 BINGO! Type !bingo in Twitch chat! 🎉";
-
-        statusMessage.classList.add("bingo");
-
-      }
 
       unlockClaim();
 
@@ -595,21 +557,17 @@ function checkForBingo() {
   }
 
 
-  if (statusMessage) {
-
-    statusMessage.textContent =
-      `${marked.filter(Boolean).length} of 25 spaces marked.`;
-
-    statusMessage.classList.remove("bingo");
-
-  }
+  /*
+    No status text over the center card.
+    All Bingo messaging goes to the yellow box.
+  */
 
 }
 
 
-/* =========================================
+/* =====================================================
    CLEAR MARKS
-========================================= */
+===================================================== */
 
 function clearMarks() {
 
@@ -644,22 +602,12 @@ function clearMarks() {
 
   resetClaimInformation();
 
-
-  if (statusMessage) {
-
-    statusMessage.textContent =
-      "Your marks have been cleared.";
-
-    statusMessage.classList.remove("bingo");
-
-  }
-
 }
 
 
-/* =========================================
+/* =====================================================
    START GAME / USERNAME
-========================================= */
+===================================================== */
 
 playerForm?.addEventListener(
   "submit",
@@ -674,8 +622,12 @@ playerForm?.addEventListener(
 
     if (enteredName.length < 2) {
 
-      usernameMessage.textContent =
-        "Please enter a valid Twitch username.";
+      if (usernameMessage) {
+
+        usernameMessage.textContent =
+          "Please enter a valid Twitch username.";
+
+      }
 
       twitchUsernameInput.focus();
 
@@ -692,14 +644,35 @@ playerForm?.addEventListener(
       true;
 
 
-    activeUsername.textContent =
-      playerUsername;
+    /*
+      Hide only the input form.
+      Keep the username section in the top blue box.
+    */
 
-
-    playerSetup.classList.add(
+    playerForm.classList.add(
       "hidden"
     );
 
+
+    /*
+      Put the entered name in the top blue box.
+    */
+
+    if (activeUsernameBox) {
+
+      activeUsernameBox.textContent =
+        playerUsername;
+
+      activeUsernameBox.classList.remove(
+        "hidden"
+      );
+
+    }
+
+
+    /*
+      Card number appears in the pink box.
+    */
 
     playerInfo.classList.remove(
       "hidden"
@@ -725,9 +698,9 @@ playerForm?.addEventListener(
 );
 
 
-/* =========================================
+/* =====================================================
    NEW CARD BUTTON
-========================================= */
+===================================================== */
 
 newCardButton?.addEventListener(
   "click",
@@ -735,7 +708,9 @@ newCardButton?.addEventListener(
 
     if (!playerHasEnteredName) {
 
-      return requireUsername();
+      requireUsername();
+
+      return;
 
     }
 
@@ -748,9 +723,9 @@ newCardButton?.addEventListener(
 );
 
 
-/* =========================================
+/* =====================================================
    CLEAR BUTTON
-========================================= */
+===================================================== */
 
 clearButton?.addEventListener(
   "click",
@@ -758,37 +733,9 @@ clearButton?.addEventListener(
 );
 
 
-/* =========================================
-   HOW TO PLAY
-========================================= */
-
-rulesButton?.addEventListener(
-  "click",
-  () => {
-
-    rulesPanel?.classList.remove(
-      "hidden"
-    );
-
-  }
-);
-
-
-closeRulesButton?.addEventListener(
-  "click",
-  () => {
-
-    rulesPanel?.classList.add(
-      "hidden"
-    );
-
-  }
-);
-
-
-/* =========================================
+/* =====================================================
    INITIAL SETUP
-========================================= */
+===================================================== */
 
 setCardControlsEnabled(false);
 
