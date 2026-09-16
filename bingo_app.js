@@ -19,16 +19,21 @@ const rulesButton = document.getElementById("rulesButton");
 const closeRulesButton = document.getElementById("closeRulesButton");
 const rulesPanel = document.getElementById("rulesPanel");
 
-/* Username elements */
-const playerForm = document.getElementById("playerForm");
-const twitchUsernameInput = document.getElementById("twitchUsername");
-const getCardButton = document.getElementById("getCardButton");
-const usernameMessage = document.getElementById("usernameMessage");
-const playerSetup = document.getElementById("playerSetup");
-const playerInfo = document.getElementById("playerInfo");
-const activeUsername = document.getElementById("activeUsername");
+/* =========================================
+   FIXED USERNAME ELEMENT IDs
+========================================= */
 
-/* Bingo claim elements */
+const playerForm = document.getElementById("usernameForm");
+const twitchUsernameInput = document.getElementById("usernameInput");
+const usernameMessage = document.getElementById("usernameError");
+const playerSetup = document.getElementById("usernameSection");
+const playerInfo = document.getElementById("playerInfo");
+const activeUsername = document.getElementById("playerNameDisplay");
+
+/* =========================================
+   BINGO CLAIM ELEMENTS
+========================================= */
+
 const bingoClaimSection = document.getElementById("bingoClaimSection");
 const bingoClaimButton = document.getElementById("bingoClaimButton");
 const claimMessage = document.getElementById("claimMessage");
@@ -354,7 +359,7 @@ function renderCard() {
 
     bingoCard.innerHTML = "";
 
-    currentCard.forEach((item, index) => {
+    currentCard.forEach(function (item) {
         const square = document.createElement("button");
 
         square.type = "button";
@@ -537,7 +542,7 @@ function clearMarks() {
    PLAYER NAME SUBMISSION
 ========================================= */
 
-if (playerForm) {
+if (playerForm && twitchUsernameInput) {
     playerForm.addEventListener("submit", function (event) {
         event.preventDefault();
 
@@ -545,45 +550,60 @@ if (playerForm) {
             twitchUsernameInput.value.trim();
 
         if (enteredName === "") {
-            usernameMessage.textContent =
-                "You must enter your Twitch username first.";
+            if (usernameMessage) {
+                usernameMessage.textContent =
+                    "You must enter your Twitch username first.";
+            }
 
             twitchUsernameInput.focus();
             return;
         }
 
         if (enteredName.length < 2) {
-            usernameMessage.textContent =
-                "Please enter a valid Twitch username.";
+            if (usernameMessage) {
+                usernameMessage.textContent =
+                    "Please enter a valid Twitch username.";
+            }
 
             twitchUsernameInput.focus();
             return;
         }
 
+        /* Save username */
         playerUsername = enteredName;
         playerHasEnteredName = true;
 
+        /* Display username */
         if (activeUsername) {
             activeUsername.textContent = playerUsername;
         }
 
+        /* Hide username form */
         if (playerSetup) {
             playerSetup.classList.add("hidden");
         }
 
+        /* Show player information */
         if (playerInfo) {
             playerInfo.classList.remove("hidden");
         }
 
+        /* Clear error message */
         if (usernameMessage) {
             usernameMessage.textContent = "";
         }
 
+        /* Unlock card controls */
         setCardControlsEnabled(true);
 
+        /* Create the player's card */
         cardNumber = 1;
         createNewCard();
     });
+} else {
+    console.error(
+        "Bingo username form was not found. Check that the HTML uses usernameForm and usernameInput."
+    );
 }
 
 /* =========================================
@@ -658,11 +678,6 @@ if (bingoClaimButton) {
 /* =========================================
    INITIAL LOCK STATE
 ========================================= */
-
-/*
-   The card starts locked.
-   No card is generated until the player enters a name.
-*/
 
 setCardControlsEnabled(false);
 
