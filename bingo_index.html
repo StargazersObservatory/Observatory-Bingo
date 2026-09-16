@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>The Observatory Bingo</title>
+
+    <link rel="stylesheet" href="bingo_style.css">
+</head>
+<body>
+
+    <div class="space-background"></div>
+
+    <main class="observatory-page">
+
+        <header class="hero">
+
+            <div class="moon">🌙</div>
+
+            <div class="planet planet-one">🪐</div>
+            <div class="planet planet-two">🌌</div>
+
+            <div class="goblin goblin-left">👽</div>
+            <div class="goblin goblin-right">👾</div>
+
+            <p class="eyebrow">🌠 THE OBSERVATORY PRESENTS 🌠</p>
+
+            <h1>
+                THE OBSERVATORY
+                <span>BINGO</span>
+            </h1>
+
+            <p class="tagline">
+                Mark the moments. Make the memories.
+            </p>
+
+            <p class="sub-tagline">
+                CHAOTIC MOMENTS. COSMIC GOBLINS. BRIGHTER SKIES.
+            </p>
+
+        </header>
+
+        <section class="how-to-play">
+
+            <div class="instruction">
+                <div class="instruction-icon">👀</div>
+                <div>
+                    <strong>1. WATCH</strong>
+                    <span>Keep an eye on stream.</span>
+                </div>
+            </div>
+
+            <div class="instruction">
+                <div class="instruction-icon">☑️</div>
+                <div>
+                    <strong>2. TAP</strong>
+                    <span>Tap a square when it happens.</span>
+                </div>
+            </div>
+
+            <div class="instruction">
+                <div class="instruction-icon">👑</div>
+                <div>
+                    <strong>3. BINGO!</strong>
+                    <span>Get 5 in a row, then type !bingoclaim.</span>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="bingo-wrapper">
+
+            <div class="bingo-heading">
+                <span>🛰️ OBSERVATORY BINGO</span>
+                <span id="cardNumber">CARD #1</span>
+            </div>
+
+            <div id="bingoCard" class="bingo-card"></div>
+
+            <div id="statusMessage" class="status-message">
+                Tap a square when the moment happens!
+            </div>
+
+        </section>
+
+        <section class="controls">
+
+            <button id="newCardButton" class="control-button pink-button">
+                🔀 NEW CARD
+                <small>Get a fresh card!</small>
+            </button>
+
+            <button id="clearButton" class="control-button blue-button">
+                🔄 CLEAR MARKS
+                <small>Reset your card.</small>
+            </button>
+
+            <button id="rulesButton" class="control-button purple-button">
+                🏆 HOW TO PLAY
+                <small>View rules and info.</small>
+            </button>
+
+        </section>
+
+        <section id="rulesPanel" class="rules-panel hidden">
+
+            <h2>🌟 HOW TO PLAY 🌟</h2>
+
+            <p>
+                Watch The Observatory stream and tap a square whenever that
+                moment happens.
+            </p>
+
+            <ul>
+                <li>Complete 5 squares in a row, column, or diagonal.</li>
+                <li>The center square is automatically marked.</li>
+                <li>When you get Bingo, type <strong>!bingoclaim</strong> in Twitch chat.</li>
+                <li>Have fun and embrace the Cosmic Goblins!</li>
+            </ul>
+
+            <button id="closeRulesButton" class="close-button">
+                CLOSE RULES
+            </button>
+
+        </section>
+
+        <footer class="footer">
+
+            <div class="footer-message">
+                <span>✨</span>
+                See You in the Stars
+                <span>✨</span>
+            </div>
+
+            <p>
+                Same chaos. New memories. The Observatory always.
+            </p>
+
+            <div class="footer-stars">
+                🌵 💎 🌵 💎 🌵
+            </div>
+
+        </footer>
+
+    </main>
+
+    <script src="bingo_app.js"></script>
+
+</body>
+</html>

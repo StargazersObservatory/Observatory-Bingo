@@ -1,0 +1,544 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --pink: #ff22c8;
+    --hot-pink: #ff4ee8;
+    --blue: #27aaff;
+    --purple: #9c45ff;
+    --light-purple: #d99bff;
+    --white: #ffffff;
+    --dark-space: #050014;
+    --panel: rgba(8, 4, 38, 0.88);
+    --gold: #ffe66d;
+}
+
+html {
+    min-height: 100%;
+    background: #050014;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--white);
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    background:
+        radial-gradient(circle at 15% 10%, rgba(255, 0, 183, 0.35), transparent 22%),
+        radial-gradient(circle at 85% 15%, rgba(89, 0, 255, 0.4), transparent 25%),
+        radial-gradient(circle at 50% 80%, rgba(0, 100, 255, 0.25), transparent 35%),
+        linear-gradient(160deg, #03000e, #12002e 45%, #03000e);
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.7;
+    background-image:
+        radial-gradient(circle, #ffffff 1px, transparent 1px),
+        radial-gradient(circle, #ff72ec 1px, transparent 1px),
+        radial-gradient(circle, #8e7bff 1px, transparent 1px);
+    background-size: 75px 75px, 125px 125px, 180px 180px;
+    background-position: 0 0, 30px 50px, 90px 20px;
+    z-index: 0;
+}
+
+.space-background {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+        radial-gradient(ellipse at 80% 5%, transparent 0 15%, rgba(255, 0, 190, 0.08) 30%, transparent 55%),
+        radial-gradient(ellipse at 20% 90%, rgba(150, 0, 255, 0.16), transparent 45%);
+}
+
+.observatory-page {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 1100px);
+    margin: 0 auto;
+    padding: 20px 14px 45px;
+}
+
+.hero {
+    position: relative;
+    text-align: center;
+    padding: 15px 0 25px;
+}
+
+.eyebrow {
+    margin: 0 0 12px;
+    color: var(--white);
+    font-size: clamp(0.65rem, 2vw, 1rem);
+    letter-spacing: 5px;
+    text-shadow:
+        0 0 5px var(--white),
+        0 0 14px var(--blue);
+}
+
+h1 {
+    position: relative;
+    margin: 0;
+    color: var(--pink);
+    font-size: clamp(2.4rem, 8vw, 6.5rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow:
+        0 0 5px #ffffff,
+        0 0 12px var(--pink),
+        0 0 25px var(--pink),
+        0 0 50px #9c00ff;
+}
+
+h1 span {
+    display: block;
+    margin-top: 10px;
+    color: var(--blue);
+    font-size: 1.15em;
+    text-shadow:
+        0 0 5px #ffffff,
+        0 0 12px var(--blue),
+        0 0 25px var(--blue),
+        0 0 50px #2600ff;
+}
+
+.tagline {
+    margin: 18px 0 8px;
+    color: var(--hot-pink);
+    font-family: "Brush Script MT", "Segoe Script", cursive;
+    font-size: clamp(1.4rem, 4vw, 2.8rem);
+    text-shadow:
+        0 0 7px var(--pink),
+        0 0 18px var(--pink);
+}
+
+.sub-tagline {
+    margin: 0;
+    color: var(--white);
+    font-size: clamp(0.65rem, 2vw, 1rem);
+    letter-spacing: 4px;
+    text-shadow:
+        0 0 5px var(--white),
+        0 0 12px var(--blue);
+}
+
+.goblin,
+.moon,
+.planet {
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
+    filter: drop-shadow(0 0 12px var(--pink));
+}
+
+.goblin {
+    font-size: clamp(3rem, 9vw, 7rem);
+    animation: float 5s ease-in-out infinite;
+}
+
+.goblin-left {
+    left: -5px;
+    top: 60px;
+}
+
+.goblin-right {
+    right: -5px;
+    top: 85px;
+    animation-delay: 1.5s;
+}
+
+.moon {
+    left: 0;
+    top: -5px;
+    font-size: clamp(2rem, 6vw, 5rem);
+}
+
+.planet-one {
+    right: 5%;
+    top: 0;
+    font-size: clamp(2rem, 5vw, 4rem);
+    filter: drop-shadow(0 0 14px var(--blue));
+}
+
+.planet-two {
+    left: 8%;
+    bottom: 0;
+    font-size: clamp(1.5rem, 4vw, 3rem);
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(-3deg);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(3deg);
+    }
+}
+
+.how-to-play {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 10px auto 20px;
+    padding: 15px;
+    border: 2px solid var(--blue);
+    border-radius: 18px;
+    background: rgba(4, 4, 35, 0.85);
+    box-shadow:
+        0 0 8px var(--blue),
+        0 0 22px rgba(39, 170, 255, 0.5),
+        inset 0 0 20px rgba(39, 170, 255, 0.1);
+}
+
+.instruction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-width: 0;
+    text-align: left;
+}
+
+.instruction-icon {
+    flex-shrink: 0;
+    font-size: clamp(1.7rem, 4vw, 3rem);
+    filter: drop-shadow(0 0 8px var(--pink));
+}
+
+.instruction strong {
+    display: block;
+    color: var(--hot-pink);
+    font-size: clamp(0.8rem, 2vw, 1.1rem);
+    text-shadow: 0 0 8px var(--pink);
+}
+
+.instruction span {
+    display: block;
+    margin-top: 4px;
+    color: var(--white);
+    font-size: clamp(0.65rem, 1.6vw, 0.9rem);
+    line-height: 1.3;
+}
+
+.bingo-wrapper {
+    padding: 15px;
+    border: 2px solid var(--pink);
+    border-radius: 20px;
+    background: var(--panel);
+    box-shadow:
+        0 0 8px var(--pink),
+        0 0 30px rgba(255, 34, 200, 0.4),
+        inset 0 0 30px rgba(255, 34, 200, 0.08);
+}
+
+.bingo-heading {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+    color: var(--gold);
+    font-size: clamp(0.75rem, 2vw, 1.1rem);
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow:
+        0 0 6px var(--gold),
+        0 0 14px #ff8c00;
+}
+
+.bingo-card {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.bingo-square {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-width: 0;
+    aspect-ratio: 1 / 1;
+    padding: 8px;
+    border: 2px solid var(--blue);
+    border-radius: 12px;
+    color: var(--white);
+    background:
+        radial-gradient(circle at 50% 0%, rgba(72, 0, 255, 0.5), transparent 65%),
+        linear-gradient(145deg, rgba(20, 18, 75, 0.95), rgba(9, 5, 45, 0.95));
+    box-shadow:
+        0 0 6px var(--blue),
+        inset 0 0 15px rgba(0, 140, 255, 0.12);
+    font-family: inherit;
+    font-size: clamp(0.55rem, 1.7vw, 1rem);
+    font-weight: bold;
+    line-height: 1.15;
+    text-align: center;
+    overflow-wrap: anywhere;
+    cursor: pointer;
+    transition:
+        transform 0.15s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.bingo-square:nth-child(even) {
+    border-color: var(--pink);
+    box-shadow:
+        0 0 6px var(--pink),
+        inset 0 0 15px rgba(255, 0, 190, 0.12);
+}
+
+.bingo-square:hover {
+    transform: translateY(-3px);
+    border-color: var(--gold);
+    box-shadow:
+        0 0 10px var(--gold),
+        0 0 22px rgba(255, 230, 109, 0.4);
+}
+
+.bingo-square:active {
+    transform: scale(0.95);
+}
+
+.bingo-square.marked {
+    color: #ffffff;
+    border-color: #4affc4;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(0, 255, 190, 0.5), transparent 65%),
+        linear-gradient(145deg, #08785d, #063b3d);
+    box-shadow:
+        0 0 10px #4affc4,
+        0 0 24px rgba(74, 255, 196, 0.5),
+        inset 0 0 18px rgba(74, 255, 196, 0.15);
+}
+
+.bingo-square.free-space {
+    color: var(--gold);
+    border-color: var(--gold);
+    background:
+        radial-gradient(circle, rgba(255, 230, 109, 0.45), transparent 65%),
+        linear-gradient(145deg, #6c318d, #241447);
+    box-shadow:
+        0 0 12px var(--gold),
+        0 0 28px rgba(255, 230, 109, 0.4);
+}
+
+.bingo-square .square-icon {
+    display: block;
+    margin-bottom: 7px;
+    font-size: clamp(1.3rem, 4vw, 2.5rem);
+    filter: drop-shadow(0 0 7px var(--pink));
+}
+
+.status-message {
+    min-height: 25px;
+    margin: 16px 0 0;
+    color: var(--light-purple);
+    font-size: clamp(0.75rem, 2vw, 1rem);
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 0 0 8px var(--purple);
+}
+
+.status-message.bingo {
+    color: var(--gold);
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    text-shadow:
+        0 0 7px var(--gold),
+        0 0 18px #ff8c00;
+}
+
+.controls {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.control-button {
+    min-height: 75px;
+    padding: 12px;
+    border: 2px solid;
+    border-radius: 14px;
+    color: var(--white);
+    font-family: inherit;
+    font-size: clamp(0.7rem, 2vw, 1rem);
+    font-weight: bold;
+    cursor: pointer;
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.2s ease;
+}
+
+.control-button small {
+    display: block;
+    margin-top: 6px;
+    color: var(--white);
+    font-size: clamp(0.6rem, 1.6vw, 0.85rem);
+    font-weight: normal;
+}
+
+.control-button:hover {
+    transform: translateY(-3px);
+}
+
+.pink-button {
+    border-color: var(--pink);
+    background: linear-gradient(135deg, #a90079, #ff22c8);
+    box-shadow:
+        0 0 8px var(--pink),
+        0 0 20px rgba(255, 34, 200, 0.35);
+}
+
+.blue-button {
+    border-color: var(--blue);
+    background: linear-gradient(135deg, #07529d, #168fff);
+    box-shadow:
+        0 0 8px var(--blue),
+        0 0 20px rgba(39, 170, 255, 0.35);
+}
+
+.purple-button {
+    border-color: var(--purple);
+    background: linear-gradient(135deg, #5420a1, #a64cff);
+    box-shadow:
+        0 0 8px var(--purple),
+        0 0 20px rgba(156, 69, 255, 0.35);
+}
+
+.rules-panel {
+    margin: 20px 0;
+    padding: 22px;
+    border: 2px solid var(--gold);
+    border-radius: 18px;
+    background: rgba(30, 10, 55, 0.95);
+    box-shadow:
+        0 0 10px var(--gold),
+        0 0 25px rgba(255, 230, 109, 0.3);
+}
+
+.rules-panel h2 {
+    margin-top: 0;
+    color: var(--gold);
+    text-align: center;
+    text-shadow: 0 0 8px var(--gold);
+}
+
+.rules-panel p,
+.rules-panel li {
+    color: var(--white);
+    line-height: 1.6;
+}
+
+.close-button {
+    display: block;
+    margin: 18px auto 0;
+    padding: 12px 22px;
+    border: 2px solid var(--pink);
+    border-radius: 999px;
+    color: white;
+    background: #8c147b;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.footer {
+    position: relative;
+    margin-top: 25px;
+    padding: 25px 10px 0;
+    text-align: center;
+}
+
+.footer-message {
+    color: var(--hot-pink);
+    font-family: "Brush Script MT", "Segoe Script", cursive;
+    font-size: clamp(1.8rem, 5vw, 3.5rem);
+    text-shadow:
+        0 0 7px var(--pink),
+        0 0 18px var(--pink);
+}
+
+.footer p {
+    color: var(--light-purple);
+    font-size: clamp(0.7rem, 2vw, 1rem);
+}
+
+.footer-stars {
+    margin-top: 15px;
+    color: var(--pink);
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    letter-spacing: 10px;
+    text-shadow: 0 0 10px var(--pink);
+}
+
+@media (max-width: 700px) {
+
+    .observatory-page {
+        padding: 12px 8px 30px;
+    }
+
+    .goblin-left {
+        left: -10px;
+        top: 80px;
+    }
+
+    .goblin-right {
+        right: -10px;
+        top: 105px;
+    }
+
+    .how-to-play {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .instruction {
+        justify-content: flex-start;
+    }
+
+    .bingo-wrapper {
+        padding: 8px;
+    }
+
+    .bingo-card {
+        gap: 4px;
+    }
+
+    .bingo-square {
+        border-width: 1px;
+        border-radius: 6px;
+        padding: 3px;
+        font-size: clamp(0.48rem, 2.2vw, 0.8rem);
+    }
+
+    .controls {
+        grid-template-columns: 1fr;
+    }
+
+    .control-button {
+        min-height: 58px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
