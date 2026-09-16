@@ -8,23 +8,26 @@
 
     <link rel="stylesheet" href="bingo_style.css">
 </head>
+
 <body>
 
     <div class="space-background"></div>
 
     <main class="observatory-page">
 
+        <!-- HEADER -->
         <header class="hero">
 
             <div class="moon">🌙</div>
-
             <div class="planet planet-one">🪐</div>
             <div class="planet planet-two">🌌</div>
 
             <div class="goblin goblin-left">👽</div>
             <div class="goblin goblin-right">👾</div>
 
-            <p class="eyebrow">🌠 THE OBSERVATORY PRESENTS 🌠</p>
+            <p class="eyebrow">
+                🌠 THE OBSERVATORY PRESENTS 🌠
+            </p>
 
             <h1>
                 THE OBSERVATORY
@@ -41,10 +44,13 @@
 
         </header>
 
+
+        <!-- HOW TO PLAY -->
         <section class="how-to-play">
 
             <div class="instruction">
                 <div class="instruction-icon">👀</div>
+
                 <div>
                     <strong>1. WATCH</strong>
                     <span>Keep an eye on stream.</span>
@@ -53,6 +59,7 @@
 
             <div class="instruction">
                 <div class="instruction-icon">☑️</div>
+
                 <div>
                     <strong>2. TAP</strong>
                     <span>Tap a square when it happens.</span>
@@ -61,104 +68,117 @@
 
             <div class="instruction">
                 <div class="instruction-icon">👑</div>
+
                 <div>
                     <strong>3. BINGO!</strong>
-                    <span>Get 5 in a row, then press BINGO! CLAIM.</span>
+                    <span>Get 5 in a row, then type !bingoclaim.</span>
                 </div>
             </div>
 
         </section>
 
-        <section class="player-section">
 
-            <div class="player-header">
-                <span class="player-icon">🧑‍🚀</span>
+        <!-- USERNAME SECTION -->
+        <section
+            id="usernameSection"
+            class="username-section"
+        >
 
-                <div>
-                    <h2>ENTER YOUR TWITCH USERNAME</h2>
-                    <p>Your card is connected to the name you enter here.</p>
-                </div>
-            </div>
+            <h2>🌌 ENTER YOUR OBSERVATORY NAME 🌌</h2>
 
-            <form id="playerForm" class="player-form">
+            <p>
+                Enter your Twitch username before using your Bingo card.
+            </p>
 
-                <label for="twitchUsername">
+            <form id="usernameForm">
+
+                <label for="usernameInput">
                     Twitch Username
                 </label>
 
-                <div class="username-row">
+                <input
+                    type="text"
+                    id="usernameInput"
+                    name="username"
+                    placeholder="Enter your Twitch username"
+                    maxlength="30"
+                    autocomplete="off"
+                    required
+                >
 
-                    <input
-                        type="text"
-                        id="twitchUsername"
-                        name="twitchUsername"
-                        placeholder="Enter your Twitch username"
-                        maxlength="25"
-                        autocomplete="off"
-                        required
-                    >
+                <button
+                    type="submit"
+                    id="startButton"
+                    class="control-button pink-button"
+                >
+                    🚀 START BINGO
+                    <small>Activate your card</small>
+                </button>
 
-                    <button type="submit" id="getCardButton">
-                        🚀 GET MY CARD
-                    </button>
-
-                </div>
-
-                <p id="usernameMessage" class="username-message"></p>
+                <p
+                    id="usernameError"
+                    class="username-error"
+                    aria-live="polite"
+                ></p>
 
             </form>
 
-            <div id="playerInfo" class="player-info hidden">
-                🛰️ Player:
-                <strong id="activeUsername"></strong>
-            </div>
+        </section>
+
+
+        <!-- PLAYER INFORMATION -->
+        <section
+            id="playerInfo"
+            class="player-info hidden"
+        >
+
+            <p>
+                Playing as:
+                <strong id="playerNameDisplay"></strong>
+            </p>
 
         </section>
 
+
+        <!-- BINGO CARD -->
         <section class="bingo-wrapper">
 
             <div class="bingo-heading">
-                <span>🛰️ OBSERVATORY BINGO</span>
-                <span id="cardNumber">CARD #1</span>
+
+                <span>
+                    🛰️ OBSERVATORY BINGO
+                </span>
+
+                <span id="cardNumber">
+                    CARD #1
+                </span>
+
             </div>
 
-            <div id="bingoCard" class="bingo-card"></div>
+            <div
+                id="bingoCard"
+                class="bingo-card"
+            ></div>
 
-            <div id="statusMessage" class="status-message">
-                Enter your Twitch username to activate your card.
-            </div>
-
-        </section>
-
-        <section
-            id="bingoClaimSection"
-            class="bingo-claim-section hidden"
-        >
-
-            <h2>🎉 GOT BINGO?</h2>
-
-            <p>
-                Complete a row, column, or diagonal, then press the button
-                below to send your claim to the Observatory crew.
-            </p>
-
-            <button
-                id="bingoClaimButton"
-                class="bingo-claim-button"
-                disabled
+            <div
+                id="statusMessage"
+                class="status-message"
+                aria-live="polite"
             >
-                🎉 BINGO! CLAIM
-            </button>
-
-            <p id="claimMessage" class="claim-message"></p>
+                Enter your username above to begin.
+            </div>
 
         </section>
 
+
+        <!-- CONTROLS -->
         <section class="controls">
 
             <button
                 id="newCardButton"
                 class="control-button pink-button"
+                type="button"
+                disabled
             >
                 🔀 NEW CARD
                 <small>Get a fresh card!</small>
@@ -167,6 +187,8 @@
             <button
                 id="clearButton"
                 class="control-button blue-button"
+                type="button"
+                disabled
             >
                 🔄 CLEAR MARKS
                 <small>Reset your card.</small>
@@ -175,6 +197,7 @@
             <button
                 id="rulesButton"
                 class="control-button purple-button"
+                type="button"
             >
                 🏆 HOW TO PLAY
                 <small>View rules and info.</small>
@@ -182,9 +205,16 @@
 
         </section>
 
-        <section id="rulesPanel" class="rules-panel hidden">
 
-            <h2>🌟 HOW TO PLAY 🌟</h2>
+        <!-- RULES PANEL -->
+        <section
+            id="rulesPanel"
+            class="rules-panel hidden"
+        >
+
+            <h2>
+                🌟 HOW TO PLAY 🌟
+            </h2>
 
             <p>
                 Watch The Observatory stream and tap a square whenever
@@ -192,6 +222,10 @@
             </p>
 
             <ul>
+                <li>
+                    Enter your Twitch username before starting.
+                </li>
+
                 <li>
                     Complete 5 squares in a row, column, or diagonal.
                 </li>
@@ -201,8 +235,9 @@
                 </li>
 
                 <li>
-                    When you get Bingo, press BINGO! CLAIM and type
-                    <strong>!bingoclaim</strong> in Twitch chat.
+                    When you get Bingo, type
+                    <strong>!bingoclaim</strong>
+                    in Twitch chat.
                 </li>
 
                 <li>
@@ -213,12 +248,15 @@
             <button
                 id="closeRulesButton"
                 class="close-button"
+                type="button"
             >
                 CLOSE RULES
             </button>
 
         </section>
 
+
+        <!-- FOOTER -->
         <footer class="footer">
 
             <div class="footer-message">
@@ -239,6 +277,8 @@
 
     </main>
 
+
+    <!-- JAVASCRIPT -->
     <script src="bingo_app.js"></script>
 
 </body>
