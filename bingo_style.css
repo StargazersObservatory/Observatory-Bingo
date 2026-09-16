@@ -1,7 +1,7 @@
 /* =========================================
    THE OBSERVATORY BINGO
-   FULL VISIBILITY FIX
-   BACKGROUND: 1402 x 1122
+   COMPLETE STYLE FIX
+   BACKGROUND SIZE: 1402 x 1122
 ========================================= */
 
 :root {
@@ -11,7 +11,12 @@
   --gold: #ffdc65;
   --green: #65ffb0;
   --white: #ffffff;
+  --panel: rgba(5, 8, 35, 0.88);
 }
+
+/* =========================================
+   PAGE RESET
+========================================= */
 
 * {
   box-sizing: border-box;
@@ -19,25 +24,21 @@
 
 html,
 body {
-  width: 100%;
-  height: 100%;
   margin: 0;
   padding: 0;
-
-  overflow: hidden;
-
+  width: 100%;
+  min-height: 100%;
   background: #000;
-
+  color: #fff;
   font-family: Arial, Helvetica, sans-serif;
-  color: #ffffff;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 body {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  display: grid;
+  place-items: start center;
 }
-
 
 /* =========================================
    MAIN BACKGROUND
@@ -45,51 +46,30 @@ body {
 
 .bingo-stage {
   position: relative;
-
-  width: 100vw;
-  max-width: 1402px;
-
+  width: min(100vw, 1402px);
+  height: auto;
   aspect-ratio: 1402 / 1122;
 
-  background-color: #000;
-
-  background-image: url("./Bingo_background.png");
-
-  background-repeat: no-repeat;
-
-  background-position: center top;
-
-  background-size: 100% 100%;
+  background:
+    #000
+    url("Bingo_background.png")
+    center top / 100% 100%
+    no-repeat;
 
   overflow: hidden;
 }
 
-
-/* =========================================
-   OVERLAY
-========================================= */
-
 .game-overlay {
   position: absolute;
-
   inset: 0;
-
   width: 100%;
   height: 100%;
 }
 
-
-/* =========================================
-   GENERAL ZONES
-========================================= */
-
 .overlay-zone {
   position: absolute;
-
   min-width: 0;
-  min-height: 0;
 }
-
 
 /* =========================================
    USERNAME AREA
@@ -98,7 +78,6 @@ body {
 .username-zone {
   left: 2.5%;
   top: 34.2%;
-
   width: 23.3%;
   height: 12.5%;
 
@@ -106,38 +85,35 @@ body {
   align-items: center;
   justify-content: center;
 
-  padding: 2%;
+  padding: 2.2%;
 }
 
 .username-form {
   width: 100%;
+  height: 100%;
 
   display: flex;
   flex-direction: column;
-
-  gap: 8%;
+  justify-content: center;
+  gap: 7%;
 }
 
 .username-form input {
   width: 100%;
   height: 37%;
-
   min-width: 0;
 
   padding: 0 5%;
 
   border: 2px solid var(--cyan);
   border-radius: 12px;
-
   outline: none;
 
-  background: rgba(0, 5, 35, 0.9);
-
-  color: #ffffff;
+  background: rgba(0, 5, 35, 0.82);
+  color: #fff;
 
   text-align: center;
-
-  font-size: clamp(10px, 1.25vw, 21px);
+  font-size: clamp(8px, 1vw, 15px);
 
   box-shadow:
     0 0 8px var(--cyan),
@@ -155,35 +131,30 @@ body {
   border: 2px solid var(--pink);
   border-radius: 12px;
 
-  background: rgba(50, 0, 65, 0.9);
+  background: rgba(50, 0, 65, 0.72);
+  color: #fff;
 
-  color: #ffffff;
-
-  font-size: clamp(9px, 1.1vw, 18px);
-
+  font-size: clamp(7px, 0.85vw, 13px);
   font-weight: 900;
 
-  cursor: pointer;
-
+  text-shadow: 0 0 7px var(--pink);
   box-shadow: 0 0 8px var(--pink);
+
+  cursor: pointer;
 }
 
 .inline-message {
   position: absolute;
-
   left: 5%;
   right: 5%;
-  bottom: -8%;
+  bottom: -7%;
 
   margin: 0;
 
   color: #ff9db9;
-
-  font-size: clamp(8px, 0.85vw, 14px);
-
+  font-size: clamp(6px, 0.65vw, 10px);
   text-align: center;
 }
-
 
 /* =========================================
    PLAYER INFORMATION
@@ -192,17 +163,14 @@ body {
 .player-zone {
   left: 2.5%;
   top: 48.3%;
-
   width: 23.3%;
   height: 8.7%;
 
   display: flex;
   flex-direction: column;
-
   align-items: center;
   justify-content: center;
-
-  gap: 5%;
+  gap: 4%;
 
   text-align: center;
 }
@@ -211,15 +179,11 @@ body {
   max-width: 95%;
 
   overflow: hidden;
-
   text-overflow: ellipsis;
-
   white-space: nowrap;
 
   color: var(--pink);
-
-  font-size: clamp(12px, 1.65vw, 27px);
-
+  font-size: clamp(9px, 1.1vw, 17px);
   font-weight: 900;
 
   text-shadow: 0 0 8px var(--pink);
@@ -227,58 +191,49 @@ body {
 
 .card-number {
   color: #a7c4ff;
-
-  font-size: clamp(10px, 1.15vw, 18px);
-
+  font-size: clamp(7px, 0.8vw, 12px);
   font-weight: 900;
+
+  text-shadow: 0 0 7px var(--blue);
 }
 
-
 /* =========================================
-   LEFT BUTTONS
+   LEFT BUTTON AREA
 ========================================= */
 
 .controls-zone {
   left: 2.5%;
   top: 64.4%;
-
   width: 23.3%;
   height: 23.5%;
 
   display: grid;
-
-  grid-template-rows: repeat(3, 1fr);
-
+  grid-template-rows: repeat(3, minmax(0, 1fr));
   gap: 5%;
 
-  padding: 1%;
+  padding: 1.1%;
 }
 
 .zone-button {
   width: 100%;
-  height: 100%;
-
   min-width: 0;
   min-height: 0;
 
   display: flex;
   flex-direction: column;
-
   align-items: center;
   justify-content: center;
+  gap: 3%;
 
-  gap: 4px;
-
-  padding: 8px;
+  padding: 2%;
 
   border: 0;
   border-radius: 12px;
-
   background: transparent;
 
-  color: #ffffff;
-
+  color: transparent;
   text-align: center;
+  line-height: 1.05;
 
   cursor: pointer;
 }
@@ -286,85 +241,71 @@ body {
 .zone-button .button-icon {
   display: block;
 
-  font-size: clamp(16px, 2vw, 30px);
-
+  font-size: clamp(9px, 1.2vw, 18px);
   line-height: 1;
 }
 
 .zone-button .button-label {
   display: block;
 
-  font-size: clamp(9px, 1.05vw, 16px);
-
-  font-weight: bold;
-
-  text-shadow:
-    0 0 5px #000000,
-    0 0 8px var(--blue);
+  font-size: clamp(5px, 0.62vw, 10px);
+  line-height: 1.05;
+  letter-spacing: 0;
 }
 
 .zone-button:disabled {
-  opacity: 0.45;
-
   cursor: not-allowed;
+  opacity: 0.45;
 }
 
+.zone-button:focus-visible,
+.username-form input:focus-visible,
+.username-form button:focus-visible,
+.close-rules:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
 
 /* =========================================
-   BINGO CARD AREA
+   CENTER BINGO CARD
 ========================================= */
 
 .card-zone {
   left: 28.2%;
   top: 33.9%;
-
   width: 42.8%;
   height: 49.4%;
 
   padding: 5.1% 1.9% 1.9%;
-
-  display: flex;
-  flex-direction: column;
-
-  overflow: hidden;
+  box-sizing: border-box;
 }
-
-
-/* =========================================
-   STATUS TEXT
-========================================= */
 
 .status-message {
   position: absolute;
-
   top: -1.5%;
-
   left: 5%;
   right: 5%;
 
+  height: 5%;
+
   margin: 0;
+  padding: 0;
 
   color: #d6dcff;
-
   text-align: center;
 
-  font-size: clamp(8px, 0.9vw, 15px);
-
+  font-size: clamp(6px, 0.65vw, 10px);
   font-weight: 900;
-
-  line-height: 1.2;
+  line-height: 1.1;
 
   text-shadow: 0 0 6px var(--blue);
-
   pointer-events: none;
 }
 
 .status-message.bingo {
   color: var(--green);
-
   text-shadow: 0 0 8px var(--green);
 }
-
 
 /* =========================================
    BINGO GRID
@@ -374,20 +315,13 @@ body {
   width: 100%;
   height: 100%;
 
-  min-width: 0;
-  min-height: 0;
-
   display: grid;
 
   grid-template-columns: repeat(5, minmax(0, 1fr));
-
   grid-template-rows: repeat(5, minmax(0, 1fr));
 
   gap: 1.5%;
-
-  overflow: hidden;
 }
-
 
 /* =========================================
    BINGO SQUARES
@@ -400,18 +334,15 @@ body {
   min-width: 0;
   min-height: 0;
 
-  padding: 3%;
-
   display: flex;
   flex-direction: column;
-
   align-items: center;
   justify-content: center;
 
+  padding: 2%;
   overflow: hidden;
 
   border: 2px solid var(--blue);
-
   border-radius: 10px;
 
   background:
@@ -421,12 +352,10 @@ body {
       rgba(2, 8, 42, 0.96)
     );
 
-  color: #ffffff;
+  color: #fff;
 
   font-weight: 900;
-
   line-height: 1.05;
-
   text-align: center;
 
   text-shadow: 0 0 5px var(--blue);
@@ -442,31 +371,41 @@ body {
   border-color: var(--pink);
 
   box-shadow:
-    0 0 10px var(--pink);
+    0 0 10px var(--pink),
+    inset 0 0 9px rgba(255, 93, 247, 0.25);
 }
+
+.bingo-square:disabled {
+  cursor: default;
+}
+
+/* SMALL ICONS */
 
 .square-icon {
   display: block;
 
-  margin-bottom: 5%;
+  margin-bottom: 3%;
 
-  font-size: clamp(12px, 2.05vw, 32px);
-
+  font-size: clamp(8px, 1.25vw, 18px);
   line-height: 1;
 }
+
+/* SMALL WORDS */
 
 .square-text {
   display: block;
 
+  width: 100%;
   max-width: 100%;
 
+  overflow: hidden;
   overflow-wrap: anywhere;
+  word-break: normal;
 
-  font-size: clamp(7px, 0.92vw, 15px);
-
-  line-height: 1.1;
+  font-size: clamp(5px, 0.58vw, 9px);
+  line-height: 1.05;
+  font-weight: 700;
 }
-
 
 /* =========================================
    MARKED SQUARE
@@ -487,7 +426,6 @@ body {
     inset 0 0 12px rgba(101, 255, 176, 0.35);
 }
 
-
 /* =========================================
    FREE SPACE
 ========================================= */
@@ -507,7 +445,6 @@ body {
     inset 0 0 12px rgba(255, 220, 101, 0.4);
 }
 
-
 /* =========================================
    CLAIM AREA
 ========================================= */
@@ -515,32 +452,26 @@ body {
 .claim-zone {
   left: 73.5%;
   top: 35.5%;
-
   width: 23.7%;
   height: 27.2%;
 
   display: flex;
   flex-direction: column;
-
   align-items: center;
   justify-content: center;
 
   padding: 7% 4% 3%;
 
   text-align: center;
-
-  overflow: hidden;
 }
 
 .claim-status {
   margin: 0;
 
-  color: #ffffff;
+  color: #fff;
 
-  font-size: clamp(9px, 1.05vw, 17px);
-
-  line-height: 1.3;
-
+  font-size: clamp(7px, 0.75vw, 11px);
+  line-height: 1.2;
   font-weight: 900;
 
   text-shadow: 0 0 5px var(--blue);
@@ -550,22 +481,19 @@ body {
   width: 100%;
 
   margin-top: 6%;
-
   padding: 4%;
 
   border: 1px dashed var(--cyan);
-
   border-radius: 9px;
 
-  background: rgba(0, 8, 35, 0.85);
+  background: rgba(0, 8, 35, 0.78);
 }
 
 .claim-result strong {
   display: block;
 
   color: var(--green);
-
-  font-size: clamp(8px, 0.9vw, 14px);
+  font-size: clamp(6px, 0.65vw, 10px);
 }
 
 .claim-result span {
@@ -574,14 +502,11 @@ body {
   margin-top: 5%;
 
   color: var(--cyan);
-
-  font-size: clamp(11px, 1.35vw, 22px);
-
+  font-size: clamp(8px, 0.85vw, 13px);
   font-weight: 900;
 
   text-shadow: 0 0 7px var(--cyan);
 }
-
 
 /* =========================================
    HOW TO PLAY BOX
@@ -592,49 +517,44 @@ body {
 
   left: 73.5%;
   top: 64.3%;
-
   width: 23.7%;
   height: 23.8%;
 
   padding: 7% 6% 4%;
 
   border: 2px solid var(--blue);
-
   border-radius: 14px;
 
-  background: rgba(3, 8, 40, 0.98);
+  background: rgba(3, 8, 40, 0.97);
 
   box-shadow:
     0 0 12px var(--blue),
     inset 0 0 12px rgba(71, 119, 255, 0.25);
 
   overflow: hidden;
-
-  z-index: 10;
+  z-index: 5;
 }
 
 .rules-overlay h2 {
   margin: 0 0 7%;
 
-  color: #ffffff;
-
+  color: #fff;
   text-align: center;
 
-  font-size: clamp(12px, 1.5vw, 24px);
+  font-size: clamp(8px, 0.95vw, 14px);
+  line-height: 1.1;
 
   text-shadow: 0 0 8px var(--cyan);
 }
 
 .rules-overlay ol {
   margin: 0;
-
   padding-left: 13%;
 
-  color: #ffffff;
+  color: #fff;
 
-  font-size: clamp(9px, 1.05vw, 16px);
-
-  line-height: 1.55;
+  font-size: clamp(5px, 0.62vw, 9px);
+  line-height: 1.3;
 }
 
 .close-rules {
@@ -644,35 +564,26 @@ body {
   right: 3%;
 
   width: 12%;
-
   aspect-ratio: 1;
 
   border: 1px solid var(--pink);
-
   border-radius: 50%;
 
-  background: rgba(30, 0, 45, 0.9);
+  background: rgba(30, 0, 45, 0.8);
+  color: #fff;
 
-  color: #ffffff;
-
-  font-size: clamp(14px, 1.5vw, 25px);
+  font-size: clamp(9px, 1vw, 15px);
 
   cursor: pointer;
 }
 
-
 /* =========================================
-   HIDDEN ELEMENTS
+   HELPERS
 ========================================= */
 
 .hidden {
   display: none !important;
 }
-
-
-/* =========================================
-   ACCESSIBILITY
-========================================= */
 
 .sr-only {
   position: absolute;
@@ -684,17 +595,34 @@ body {
   margin: -1px;
 
   overflow: hidden;
-
   clip: rect(0, 0, 0, 0);
-
   white-space: nowrap;
 
   border: 0;
 }
 
-button:focus-visible,
-input:focus-visible {
-  outline: 3px solid #ffffff;
+/* =========================================
+   MOBILE / OBS SCALING
+========================================= */
 
-  outline-offset: 3px;
+@media (max-width: 700px) {
+  .bingo-stage {
+    width: 100vw;
+  }
+
+  .bingo-square {
+    border-width: 1px;
+    border-radius: 5px;
+  }
+
+  .username-form input,
+  .username-form button {
+    border-width: 1px;
+    border-radius: 6px;
+  }
+
+  .rules-overlay {
+    border-width: 1px;
+    border-radius: 8px;
+  }
 }
