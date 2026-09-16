@@ -856,3 +856,73 @@ h1 span {
         transition: none !important;
     }
 }
+
+/* =========================================
+   CLAIM YOUR WIN
+========================================= */
+
+.claim-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    margin: 22px auto 5px;
+    text-align: center;
+}
+
+.claim-section.hidden {
+    display: none !important;
+}
+
+.claim-button {
+    display: inline-block;
+    min-width: 230px;
+    padding: 15px 28px;
+    border: 2px solid var(--gold);
+    border-radius: 14px;
+    color: #241400;
+    background: linear-gradient(
+        135deg,
+        #ffe66d,
+        #ffb300
+    );
+    font-family: inherit;
+    font-size: 1.05rem;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow:
+        0 0 10px var(--gold),
+        0 0 25px rgba(255, 230, 109, 0.45);
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.claim-button:hover:not(:disabled) {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow:
+        0 0 15px var(--gold),
+        0 0 35px rgba(255, 230, 109, 0.75);
+}
+
+.claim-button:active:not(:disabled) {
+    transform: scale(0.97);
+}
+
+.claim-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+.claim-message {
+    min-height: 22px;
+    margin: 0;
+    color: var(--green);
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 0 0 8px var(--green);
+}
