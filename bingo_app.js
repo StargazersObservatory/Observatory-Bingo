@@ -1,637 +1,793 @@
+
 "use strict";
 
 /* =========================================
-   OBSERVATORY TWITCH BINGO
+   THE OBSERVATORY BINGO
+   GAME LOGIC
 ========================================= */
+
 
 /* =========================================
-   PAGE ELEMENTS
+   ELEMENTS
 ========================================= */
 
-const bingoCard = document.getElementById("bingoCard");
-const statusMessage = document.getElementById("statusMessage");
-const cardNumberDisplay = document.getElementById("cardNumber");
+const bingoCard =
+  document.getElementById("bingoCard");
 
-const newCardButton = document.getElementById("newCardButton");
-const clearButton = document.getElementById("clearButton");
-const rulesButton = document.getElementById("rulesButton");
-const closeRulesButton = document.getElementById("closeRulesButton");
-const rulesPanel = document.getElementById("rulesPanel");
+const statusMessage =
+  document.getElementById("statusMessage");
 
-/* Username elements */
+const cardNumberDisplay =
+  document.getElementById("cardNumber");
+
+const newCardButton =
+  document.getElementById("newCardButton");
+
+const clearButton =
+  document.getElementById("clearButton");
+
+const rulesButton =
+  document.getElementById("rulesButton");
+
+const closeRulesButton =
+  document.getElementById("closeRulesButton");
+
+const rulesPanel =
+  document.getElementById("rulesPanel");
 
 const playerForm =
-    document.getElementById("usernameForm") ||
-    document.getElementById("playerForm");
+  document.getElementById("usernameForm");
 
 const twitchUsernameInput =
-    document.getElementById("usernameInput") ||
-    document.getElementById("twitchUsername");
+  document.getElementById("usernameInput");
 
 const usernameMessage =
-    document.getElementById("usernameError") ||
-    document.getElementById("usernameMessage");
+  document.getElementById("usernameError");
 
 const playerSetup =
-    document.getElementById("usernameSection") ||
-    document.getElementById("playerSetup");
+  document.getElementById("usernameSection");
 
-const playerInfo = document.getElementById("playerInfo");
+const playerInfo =
+  document.getElementById("playerInfo");
 
 const activeUsername =
-    document.getElementById("playerNameDisplay") ||
-    document.getElementById("activeUsername");
+  document.getElementById("playerNameDisplay");
 
-/* Claim elements */
+const claimStatus =
+  document.getElementById("claimStatus");
 
-const claimSection = document.getElementById("claimSection");
-const claimButton = document.getElementById("claimButton");
-const claimStatus = document.getElementById("claimStatus");
-const claimResult = document.getElementById("claimResult");
+const claimResult =
+  document.getElementById("claimResult");
 
-const claimedPlayer = document.getElementById("claimedPlayer");
-const claimedCard = document.getElementById("claimedCard");
-const claimedTime = document.getElementById("claimedTime");
-const claimChatCommand = document.getElementById("claimChatCommand");
-const claimFinalMessage = document.getElementById("claimFinalMessage");
+const claimChatCommand =
+  document.getElementById("claimChatCommand");
+
+const claimFinalMessage =
+  document.getElementById("claimFinalMessage");
+
 
 /* =========================================
-   PLAYER STATE
+   GAME STATE
 ========================================= */
 
 let playerUsername = "";
+
 let playerHasEnteredName = false;
+
 let playerHasBingo = false;
-let playerHasClaimed = false;
+
+let cardNumber = 1;
+
+let currentCard = [];
+
 
 /* =========================================
    BINGO ITEMS
 ========================================= */
 
 const bingoItems = [
-    ["🥒", "Pickle is mentioned"],
-    ["🏁", "A marbles race starts"],
-    ["🐿️", "A squirrel appears"],
-    ["🎮", "Someone uses !jumanji"],
-    ["🧸", "The claw grabs a prize"],
-    ["📚", "Homework is mentioned"],
-    ["🧪", "Pixie is mentioned"],
-    ["🛰️", "The Observatory is mentioned"],
-    ["🔊", "A sound alert plays"],
-    ["👽", "An alien appears"],
-    ["🚛", "American Truck Simulator is mentioned"],
-    ["💥", "Someone uses !bonk"],
-    ["🐻", "Yogi Bear is mentioned"],
-    ["🌌", "Someone says Cosmic Goblins"],
-    ["🦆", "The purple duck appears"],
-    ["🏆", "A marbles winner is announced"],
-    ["💬", "Someone says chat"],
-    ["🔧", "A technical issue happens"],
-    ["😴", "Someone uses !tigger"],
-    ["🎥", "A community video is suggested"],
-    ["😂", "Stargazer laughs"],
-    ["📖", "Tiny Book Shop is mentioned"],
-    ["🥒", "A pickle joke happens"],
-    ["⭐", "Someone gets a shoutout"],
-    ["🧸", "A plushie gets stuck"],
-    ["🎵", "The winners anthem plays"],
-    ["👻", "Someone uses !ghost"],
-    ["🐯", "Someone mentions Tigger"],
-    ["🚀", "Someone says one more"],
-    ["🛠️", "Something needs fixing"],
-    ["🌟", "A rare prize is found"],
-    ["📡", "A strange transmission happens"],
-    ["🪐", "A space joke happens"],
-    ["🎲", "Someone rolls the dice"],
-    ["💜", "A community member gets a shoutout"],
-    ["📢", "A stream alert interrupts"],
-    ["🤔", "Someone asks what happened"],
-    ["🌵", "A Texas reference happens"],
-    ["🎮", "A game bug happens"],
-    ["🛰️", "The Observatory needs fixing"],
-    ["👾", "A Cosmic Goblin is blamed"],
-    ["🎉", "Chat celebrates"],
-    ["💫", "Something unexpected happens"],
-    ["🗣️", "Someone says hold on"],
-    ["🎁", "A surprise reward happens"],
-    ["🌙", "Someone talks about being tired"],
-    ["📅", "The stream schedule is mentioned"],
-    ["🎬", "A classic clip is mentioned"],
-    ["🧑‍🚀", "Someone joins the crew"],
-    ["💎", "A legendary moment happens"]
+
+  ["🥒", "Pickle is mentioned"],
+
+  ["🏁", "A marbles race starts"],
+
+  ["🐿️", "A squirrel appears"],
+
+  ["🎮", "Someone uses !jumanji"],
+
+  ["🧸", "The claw grabs a prize"],
+
+  ["📚", "Homework is mentioned"],
+
+  ["🧪", "Pixie is mentioned"],
+
+  ["🛰️", "The Observatory is mentioned"],
+
+  ["🔊", "A sound alert plays"],
+
+  ["👽", "An alien appears"],
+
+  ["🚛", "American Truck Simulator is mentioned"],
+
+  ["💥", "Someone uses !bonk"],
+
+  ["🐻", "Yogi Bear is mentioned"],
+
+  ["🌌", "Someone says Cosmic Goblins"],
+
+  ["🦆", "The purple duck appears"],
+
+  ["🏆", "A marbles winner is announced"],
+
+  ["💬", "Someone says chat"],
+
+  ["🔧", "A technical issue happens"],
+
+  ["😴", "Someone uses !tigger"],
+
+  ["🎥", "A community video is suggested"],
+
+  ["😂", "Stargazer laughs"],
+
+  ["📖", "Tiny Book Shop is mentioned"],
+
+  ["🥒", "A pickle joke happens"],
+
+  ["⭐", "Someone gets a shoutout"],
+
+  ["🧸", "A plushie gets stuck"],
+
+  ["🎵", "The winners anthem plays"],
+
+  ["👻", "Someone uses !ghost"],
+
+  ["🐯", "Someone mentions Tigger"],
+
+  ["🚀", "Someone says one more"],
+
+  ["🛠️", "Something needs fixing"],
+
+  ["🌟", "A rare prize is found"],
+
+  ["📡", "A strange transmission happens"],
+
+  ["🪐", "A space joke happens"],
+
+  ["🎲", "Someone rolls the dice"],
+
+  ["💜", "A community member gets a shoutout"],
+
+  ["📢", "A stream alert interrupts"],
+
+  ["🤔", "Someone asks what happened"],
+
+  ["🌵", "A Texas reference happens"],
+
+  ["🎮", "A game bug happens"],
+
+  ["🛰️", "The Observatory needs fixing"],
+
+  ["👾", "A Cosmic Goblin is blamed"],
+
+  ["🎉", "Chat celebrates"],
+
+  ["💫", "Something unexpected happens"],
+
+  ["🗣️", "Someone says hold on"],
+
+  ["🎁", "A surprise reward happens"],
+
+  ["🌙", "Someone talks about being tired"],
+
+  ["📅", "The stream schedule is mentioned"],
+
+  ["🎬", "A classic clip is mentioned"],
+
+  ["🧑‍🚀", "Someone joins the crew"],
+
+  ["💎", "A legendary moment happens"]
+
 ];
 
-/* =========================================
-   CARD STATE
-========================================= */
-
-let cardNumber = 1;
-let currentCard = [];
 
 /* =========================================
-   HELPER FUNCTIONS
+   SHUFFLE
 ========================================= */
 
 function shuffle(array) {
-    const copy = [...array];
 
-    for (let i = copy.length - 1; i > 0; i--) {
-        const randomIndex = Math.floor(Math.random() * (i + 1));
+  const copy = [...array];
 
-        [copy[i], copy[randomIndex]] = [
-            copy[randomIndex],
-            copy[i]
-        ];
-    }
+  for (let i = copy.length - 1; i > 0; i--) {
 
-    return copy;
+    const randomIndex =
+      Math.floor(Math.random() * (i + 1));
+
+    [
+      copy[i],
+      copy[randomIndex]
+    ] = [
+      copy[randomIndex],
+      copy[i]
+    ];
+
+  }
+
+  return copy;
+
 }
 
-function showUsernameRequiredMessage() {
-    if (usernameMessage) {
-        usernameMessage.textContent =
-            "Please enter your Twitch username before using the Bingo card.";
-    }
 
-    if (twitchUsernameInput) {
-        twitchUsernameInput.focus();
-    }
+/* =========================================
+   USERNAME REQUIREMENT
+========================================= */
+
+function requireUsername() {
+
+  if (usernameMessage) {
+
+    usernameMessage.textContent =
+      "Enter your Twitch username first.";
+
+  }
+
+  twitchUsernameInput?.focus();
+
 }
+
+
+/* =========================================
+   ENABLE / DISABLE CONTROLS
+========================================= */
 
 function setCardControlsEnabled(enabled) {
-    if (newCardButton) {
-        newCardButton.disabled = !enabled;
-    }
 
-    if (clearButton) {
-        clearButton.disabled = !enabled;
-    }
+  if (newCardButton) {
 
-    if (bingoCard) {
-        bingoCard.classList.toggle("card-locked", !enabled);
-    }
+    newCardButton.disabled = !enabled;
+
+  }
+
+  if (clearButton) {
+
+    clearButton.disabled = !enabled;
+
+  }
+
 }
+
+
+/* =========================================
+   RESET CLAIM
+========================================= */
 
 function resetClaimInformation() {
-    playerHasBingo = false;
-    playerHasClaimed = false;
 
-    if (claimButton) {
-        claimButton.disabled = true;
-        claimButton.textContent = "🏆 CLAIM YOUR WIN";
-    }
+  playerHasBingo = false;
 
-    if (claimStatus) {
-        claimStatus.textContent =
-            "Complete a Bingo to unlock your claim button.";
-    }
+  if (claimStatus) {
 
-    if (claimResult) {
-        claimResult.classList.add("hidden");
-    }
+    claimStatus.textContent =
+      "Complete a Bingo to unlock your claim.";
 
-    if (claimedPlayer) {
-        claimedPlayer.textContent = "—";
-    }
+  }
 
-    if (claimedCard) {
-        claimedCard.textContent = "—";
-    }
+  claimResult?.classList.add("hidden");
 
-    if (claimedTime) {
-        claimedTime.textContent = "—";
-    }
+  if (claimFinalMessage) {
 
-    if (claimChatCommand) {
-        claimChatCommand.textContent = "!bingoclaim";
-    }
+    claimFinalMessage.textContent = "";
 
-    if (claimFinalMessage) {
-        claimFinalMessage.textContent = "";
-    }
+  }
+
+  if (claimChatCommand) {
+
+    claimChatCommand.textContent = "!bingo";
+
+  }
+
 }
 
-function unlockClaimButton() {
-    playerHasBingo = true;
 
-    if (claimButton) {
-        claimButton.disabled = false;
-        claimButton.textContent = "🏆 CLAIM YOUR WIN";
-    }
+/* =========================================
+   UNLOCK BINGO CLAIM
+========================================= */
 
-    if (claimStatus) {
-        claimStatus.textContent =
-            "🎉 Bingo detected! Click the button to record your win.";
-    }
+function unlockClaim() {
 
-    if (claimSection) {
-        claimSection.classList.remove("hidden");
-    }
+  playerHasBingo = true;
+
+  if (claimStatus) {
+
+    claimStatus.textContent =
+      "🎉 BINGO! Type !bingo in Twitch chat to claim your win!";
+
+  }
+
+  claimResult?.classList.remove("hidden");
+
+  if (claimFinalMessage) {
+
+    claimFinalMessage.textContent =
+      `${playerUsername}, your Bingo is ready!`;
+
+  }
+
 }
+
 
 /* =========================================
    CREATE NEW CARD
 ========================================= */
 
 function createNewCard() {
-    if (!playerHasEnteredName) {
-        showUsernameRequiredMessage();
-        return;
-    }
 
-    const shuffledItems = shuffle(bingoItems);
+  if (!playerHasEnteredName) {
 
-    currentCard = shuffledItems.slice(0, 24).map(function (item) {
-        return {
-            icon: item[0],
-            text: item[1],
-            freeSpace: false
-        };
-    });
+    requireUsername();
 
-    currentCard.splice(12, 0, {
-        icon: "🌌",
-        text: "FREE SPACE",
-        freeSpace: true
-    });
+    return;
 
-    resetClaimInformation();
-    renderCard();
+  }
 
-    if (cardNumberDisplay) {
-        cardNumberDisplay.textContent = `CARD #${cardNumber}`;
-    }
 
-    if (statusMessage) {
-        statusMessage.textContent =
-            "Tap a square when the moment happens!";
+  currentCard =
+    shuffle(bingoItems)
+      .slice(0, 24)
+      .map(item => ({
 
-        statusMessage.classList.remove("bingo");
-    }
+        icon: item[0],
+
+        text: item[1],
+
+        freeSpace: false
+
+      }));
+
+
+  /*
+    Insert FREE SPACE into center.
+    Index 12 = center of 5x5 card.
+  */
+
+  currentCard.splice(12, 0, {
+
+    icon: "🌌",
+
+    text: "FREE SPACE",
+
+    freeSpace: true
+
+  });
+
+
+  resetClaimInformation();
+
+  renderCard();
+
+
+  if (cardNumberDisplay) {
+
+    cardNumberDisplay.textContent =
+      `#${cardNumber}`;
+
+  }
+
+
+  if (statusMessage) {
+
+    statusMessage.textContent =
+      "Tap a square when the moment happens!";
+
+    statusMessage.classList.remove("bingo");
+
+  }
+
 }
+
 
 /* =========================================
    RENDER CARD
 ========================================= */
 
 function renderCard() {
-    if (!bingoCard) {
-        return;
+
+  if (!bingoCard) return;
+
+  bingoCard.innerHTML = "";
+
+
+  currentCard.forEach(item => {
+
+    const square =
+      document.createElement("button");
+
+    square.type = "button";
+
+    square.className = "bingo-square";
+
+    square.setAttribute(
+      "aria-label",
+      item.text
+    );
+
+    square.dataset.marked =
+      String(item.freeSpace);
+
+
+    const icon =
+      document.createElement("span");
+
+    icon.className = "square-icon";
+
+    icon.textContent = item.icon;
+
+
+    const text =
+      document.createElement("span");
+
+    text.className = "square-text";
+
+    text.textContent = item.text;
+
+
+    square.append(icon, text);
+
+
+    /*
+      FREE SPACE IS AUTOMATICALLY MARKED.
+    */
+
+    if (item.freeSpace) {
+
+      square.classList.add(
+        "free-space",
+        "marked"
+      );
+
     }
 
-    bingoCard.innerHTML = "";
 
-    currentCard.forEach(function (item) {
-        const square = document.createElement("button");
+    /*
+      CLICK TO MARK / UNMARK.
+    */
 
-        square.type = "button";
-        square.className = "bingo-square";
-        square.setAttribute("aria-label", item.text);
-        square.dataset.marked = "false";
+    square.addEventListener("click", () => {
 
-        const icon = document.createElement("span");
-        icon.className = "square-icon";
-        icon.textContent = item.icon;
+      if (!playerHasEnteredName) {
 
-        const text = document.createElement("span");
-        text.className = "square-text";
-        text.textContent = item.text;
+        requireUsername();
 
-        square.appendChild(icon);
-        square.appendChild(text);
+        return;
 
-        if (item.freeSpace) {
-            square.classList.add("free-space");
-            square.classList.add("marked");
-            square.dataset.marked = "true";
-        }
+      }
 
-        square.addEventListener("click", function () {
-            if (!playerHasEnteredName) {
-                showUsernameRequiredMessage();
-                return;
-            }
 
-            if (item.freeSpace) {
-                return;
-            }
+      if (item.freeSpace) {
 
-            const currentlyMarked =
-                square.dataset.marked === "true";
+        return;
 
-            square.dataset.marked = String(!currentlyMarked);
+      }
 
-            square.classList.toggle(
-                "marked",
-                !currentlyMarked
-            );
 
-            checkForBingo();
-        });
+      const marked =
+        square.dataset.marked === "true";
 
-        bingoCard.appendChild(square);
+
+      square.dataset.marked =
+        String(!marked);
+
+
+      square.classList.toggle(
+        "marked",
+        !marked
+      );
+
+
+      checkForBingo();
+
     });
+
+
+    bingoCard.appendChild(square);
+
+  });
+
 }
+
 
 /* =========================================
    GET MARKED SQUARES
 ========================================= */
 
 function getMarkedSquares() {
-    if (!bingoCard) {
-        return [];
-    }
 
-    return Array.from(
-        bingoCard.querySelectorAll(".bingo-square")
-    ).map(function (square) {
-        return square.dataset.marked === "true";
-    });
+  return [
+    ...bingoCard.querySelectorAll(".bingo-square")
+  ].map(square => {
+
+    return square.dataset.marked === "true";
+
+  });
+
 }
+
 
 /* =========================================
    CHECK FOR BINGO
 ========================================= */
 
 function checkForBingo() {
-    if (!playerHasEnteredName) {
-        showUsernameRequiredMessage();
-        return;
-    }
 
-    const markedSquares = getMarkedSquares();
+  if (!playerHasEnteredName) return;
 
-    const winningLines = [
-        [0, 1, 2, 3, 4],
-        [5, 6, 7, 8, 9],
-        [10, 11, 12, 13, 14],
-        [15, 16, 17, 18, 19],
-        [20, 21, 22, 23, 24],
 
-        [0, 5, 10, 15, 20],
-        [1, 6, 11, 16, 21],
-        [2, 7, 12, 17, 22],
-        [3, 8, 13, 18, 23],
-        [4, 9, 14, 19, 24],
+  const marked =
+    getMarkedSquares();
 
-        [0, 6, 12, 18, 24],
-        [4, 8, 12, 16, 20]
-    ];
 
-    const hasBingo = winningLines.some(function (line) {
-        return line.every(function (index) {
-            return markedSquares[index];
-        });
+  const winningLines = [
+
+    // ROWS
+
+    [0, 1, 2, 3, 4],
+
+    [5, 6, 7, 8, 9],
+
+    [10, 11, 12, 13, 14],
+
+    [15, 16, 17, 18, 19],
+
+    [20, 21, 22, 23, 24],
+
+
+    // COLUMNS
+
+    [0, 5, 10, 15, 20],
+
+    [1, 6, 11, 16, 21],
+
+    [2, 7, 12, 17, 22],
+
+    [3, 8, 13, 18, 23],
+
+    [4, 9, 14, 19, 24],
+
+
+    // DIAGONALS
+
+    [0, 6, 12, 18, 24],
+
+    [4, 8, 12, 16, 20]
+
+  ];
+
+
+  const hasBingo =
+    winningLines.some(line => {
+
+      return line.every(index => marked[index]);
+
     });
 
-    if (hasBingo) {
-        if (!playerHasBingo) {
-            playerHasBingo = true;
 
-            if (statusMessage) {
-                statusMessage.textContent =
-                    "🎉 BINGO! Your claim button is ready! 🎉";
+  if (hasBingo) {
 
-                statusMessage.classList.add("bingo");
-            }
+    if (!playerHasBingo) {
 
-            unlockClaimButton();
-        }
+      if (statusMessage) {
 
-        return;
-    }
-
-    const markedCount =
-        markedSquares.filter(Boolean).length;
-
-    if (statusMessage) {
         statusMessage.textContent =
-            `${markedCount} of 25 spaces marked.`;
+          "🎉 BINGO! Type !bingo in Twitch chat! 🎉";
 
-        statusMessage.classList.remove("bingo");
+        statusMessage.classList.add("bingo");
+
+      }
+
+      unlockClaim();
+
     }
+
+    return;
+
+  }
+
+
+  if (statusMessage) {
+
+    statusMessage.textContent =
+      `${marked.filter(Boolean).length} of 25 spaces marked.`;
+
+    statusMessage.classList.remove("bingo");
+
+  }
+
 }
+
 
 /* =========================================
    CLEAR MARKS
 ========================================= */
 
 function clearMarks() {
-    if (!playerHasEnteredName) {
-        showUsernameRequiredMessage();
-        return;
-    }
 
-    const squares = document.querySelectorAll(".bingo-square");
+  if (!playerHasEnteredName) {
 
-    squares.forEach(function (square, index) {
-        if (index === 12) {
-            square.dataset.marked = "true";
-            square.classList.add("marked");
-        } else {
-            square.dataset.marked = "false";
-            square.classList.remove("marked");
-        }
+    requireUsername();
+
+    return;
+
+  }
+
+
+  bingoCard
+    .querySelectorAll(".bingo-square")
+    .forEach((square, index) => {
+
+      const isFree =
+        index === 12;
+
+
+      square.dataset.marked =
+        String(isFree);
+
+
+      square.classList.toggle(
+        "marked",
+        isFree
+      );
+
     });
 
-    resetClaimInformation();
 
-    if (statusMessage) {
-        statusMessage.textContent =
-            "Your marks have been cleared.";
+  resetClaimInformation();
 
-        statusMessage.classList.remove("bingo");
-    }
+
+  if (statusMessage) {
+
+    statusMessage.textContent =
+      "Your marks have been cleared.";
+
+    statusMessage.classList.remove("bingo");
+
+  }
+
 }
+
 
 /* =========================================
-   PLAYER NAME SUBMISSION
+   START GAME / USERNAME
 ========================================= */
 
-if (playerForm) {
-    playerForm.addEventListener("submit", function (event) {
-        event.preventDefault();
+playerForm?.addEventListener(
+  "submit",
+  event => {
 
-        if (!twitchUsernameInput) {
-            return;
-        }
+    event.preventDefault();
 
-        const enteredName =
-            twitchUsernameInput.value.trim();
 
-        if (enteredName === "") {
-            if (usernameMessage) {
-                usernameMessage.textContent =
-                    "You must enter your Twitch username first.";
-            }
+    const enteredName =
+      twitchUsernameInput.value.trim();
 
-            twitchUsernameInput.focus();
-            return;
-        }
 
-        if (enteredName.length < 2) {
-            if (usernameMessage) {
-                usernameMessage.textContent =
-                    "Please enter a valid Twitch username.";
-            }
+    if (enteredName.length < 2) {
 
-            twitchUsernameInput.focus();
-            return;
-        }
+      usernameMessage.textContent =
+        "Please enter a valid Twitch username.";
 
-        playerUsername = enteredName;
-        playerHasEnteredName = true;
+      twitchUsernameInput.focus();
 
-        if (activeUsername) {
-            activeUsername.textContent = playerUsername;
-        }
+      return;
 
-        if (playerSetup) {
-            playerSetup.classList.add("hidden");
-        }
+    }
 
-        if (playerInfo) {
-            playerInfo.classList.remove("hidden");
-        }
 
-        if (usernameMessage) {
-            usernameMessage.textContent = "";
-        }
+    playerUsername =
+      enteredName;
 
-        setCardControlsEnabled(true);
 
-        cardNumber = 1;
-        createNewCard();
-    });
-}
+    playerHasEnteredName =
+      true;
+
+
+    activeUsername.textContent =
+      playerUsername;
+
+
+    playerSetup.classList.add(
+      "hidden"
+    );
+
+
+    playerInfo.classList.remove(
+      "hidden"
+    );
+
+
+    usernameMessage.textContent =
+      "";
+
+
+    setCardControlsEnabled(
+      true
+    );
+
+
+    cardNumber =
+      1;
+
+
+    createNewCard();
+
+  }
+);
+
 
 /* =========================================
    NEW CARD BUTTON
 ========================================= */
 
-if (newCardButton) {
-    newCardButton.addEventListener("click", function () {
-        if (!playerHasEnteredName) {
-            showUsernameRequiredMessage();
-            return;
-        }
+newCardButton?.addEventListener(
+  "click",
+  () => {
 
-        cardNumber++;
-        createNewCard();
-    });
-}
+    if (!playerHasEnteredName) {
+
+      return requireUsername();
+
+    }
+
+
+    cardNumber++;
+
+    createNewCard();
+
+  }
+);
+
 
 /* =========================================
    CLEAR BUTTON
 ========================================= */
 
-if (clearButton) {
-    clearButton.addEventListener("click", function () {
-        clearMarks();
-    });
-}
+clearButton?.addEventListener(
+  "click",
+  clearMarks
+);
+
 
 /* =========================================
-   RULES PANEL
+   HOW TO PLAY
 ========================================= */
 
-if (rulesButton && rulesPanel) {
-    rulesButton.addEventListener("click", function () {
-        rulesPanel.classList.remove("hidden");
-    });
-}
+rulesButton?.addEventListener(
+  "click",
+  () => {
 
-if (closeRulesButton && rulesPanel) {
-    closeRulesButton.addEventListener("click", function () {
-        rulesPanel.classList.add("hidden");
-    });
-}
+    rulesPanel?.classList.remove(
+      "hidden"
+    );
 
-/* =========================================
-   CLAIM BUTTON
-========================================= */
+  }
+);
 
-if (claimButton) {
-    claimButton.addEventListener("click", function () {
-        if (!playerHasEnteredName) {
-            showUsernameRequiredMessage();
-            return;
-        }
 
-        if (!playerHasBingo) {
-            if (claimStatus) {
-                claimStatus.textContent =
-                    "You need a complete Bingo line before claiming.";
-            }
+closeRulesButton?.addEventListener(
+  "click",
+  () => {
 
-            return;
-        }
+    rulesPanel?.classList.add(
+      "hidden"
+    );
 
-        if (playerHasClaimed) {
-            if (claimStatus) {
-                claimStatus.textContent =
-                    "This Bingo card has already been claimed.";
-            }
+  }
+);
 
-            return;
-        }
-
-        const claimTime = new Date().toLocaleString();
-
-        if (claimedPlayer) {
-            claimedPlayer.textContent = playerUsername;
-        }
-
-        if (claimedCard) {
-            claimedCard.textContent = `#${cardNumber}`;
-        }
-
-        if (claimedTime) {
-            claimedTime.textContent = claimTime;
-        }
-
-        if (claimChatCommand) {
-            claimChatCommand.textContent =
-                `!bingoclaim ${playerUsername}`;
-        }
-
-        if (claimFinalMessage) {
-            claimFinalMessage.textContent =
-                `🎉 ${playerUsername}, your Bingo claim has been recorded on this page. Type the command above in Twitch chat.`;
-        }
-
-        if (claimStatus) {
-            claimStatus.textContent =
-                "✅ Your win has been recorded below.";
-        }
-
-        if (claimResult) {
-            claimResult.classList.remove("hidden");
-        }
-
-        claimButton.disabled = true;
-        claimButton.textContent = "✅ WIN CLAIMED";
-
-        playerHasClaimed = true;
-    });
-}
 
 /* =========================================
-   INITIAL STATE
+   INITIAL SETUP
 ========================================= */
 
 setCardControlsEnabled(false);
+
 resetClaimInformation();
-
-if (bingoCard) {
-    bingoCard.innerHTML = "";
-}
-
-if (statusMessage) {
-    statusMessage.textContent =
-        "Enter your Twitch username above to receive your Bingo card.";
-}
-
-if (playerInfo) {
-    playerInfo.classList.add("hidden");
-}
