@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
@@ -10,7 +9,10 @@
 
   <title>The Observatory Bingo</title>
 
-  <link rel="stylesheet" href="bingo_style.css">
+  <link
+    rel="stylesheet"
+    href="bingo_style.css"
+  >
 </head>
 
 <body>
@@ -22,13 +24,14 @@
 
     <div class="game-overlay">
 
-      <!-- =========================================
-           USERNAME SECTION
-      ========================================== -->
+      <!-- =================================================
+           NAME INPUT
+           TOP BLUE BOX ON LEFT
+      ================================================== -->
 
       <section
-        class="overlay-zone username-zone"
         id="usernameSection"
+        class="overlay-zone username-zone"
       >
 
         <form
@@ -46,8 +49,8 @@
           <input
             id="usernameInput"
             type="text"
-            autocomplete="off"
             placeholder="Twitch username"
+            autocomplete="off"
             maxlength="30"
             required
           >
@@ -61,6 +64,12 @@
 
         </form>
 
+        <!-- This replaces the input after START is pressed -->
+        <div
+          id="activeUsernameBox"
+          class="active-username-box hidden"
+        ></div>
+
         <p
           id="usernameError"
           class="inline-message"
@@ -70,21 +79,15 @@
       </section>
 
 
-      <!-- =========================================
-           PLAYER INFORMATION
-      ========================================== -->
+      <!-- =================================================
+           CARD NUMBER
+           PINK BOX UNDER NAME BOX
+      ================================================== -->
 
       <section
-        class="overlay-zone player-zone hidden"
         id="playerInfo"
+        class="overlay-zone player-zone hidden"
       >
-
-        <div
-          id="playerNameDisplay"
-          class="player-name"
-        >
-          —
-        </div>
 
         <div
           id="cardNumber"
@@ -96,10 +99,13 @@
       </section>
 
 
-      <!-- =========================================
-           LEFT BUTTONS
-           Button text is supplied by HTML
-      ========================================== -->
+      <!-- =================================================
+           LEFT BOTTOM BUTTONS
+           THREE ARTWORK BOXES:
+           1. NEW CARD
+           2. CLEAR CARD
+           3. EMPTY NOTEPAD BOX
+      ================================================== -->
 
       <section
         class="overlay-zone controls-zone"
@@ -112,10 +118,8 @@
           disabled
           aria-label="Get a new Bingo card"
         >
-          <span class="button-icon">🎲</span>
-          <span class="button-label">NEW CARD</span>
+          NEW CARD
         </button>
-
 
         <button
           id="clearButton"
@@ -124,27 +128,17 @@
           disabled
           aria-label="Clear Bingo marks"
         >
-          <span class="button-icon">🧹</span>
-          <span class="button-label">CLEAR</span>
+          CLEAR CARD
         </button>
 
-
-        <button
-          id="rulesButton"
-          class="zone-button"
-          type="button"
-          aria-label="Show how to play"
-        >
-          <span class="button-icon">📖</span>
-          <span class="button-label">HOW TO PLAY</span>
-        </button>
+        <!-- Deliberately empty. The How To Play button is gone. -->
 
       </section>
 
 
-      <!-- =========================================
+      <!-- =================================================
            CENTER BINGO CARD
-      ========================================== -->
+      ================================================== -->
 
       <section
         class="overlay-zone card-zone"
@@ -167,14 +161,13 @@
       </section>
 
 
-      <!-- =========================================
-           CLAIM AREA
-           Claim is done with !bingo in Twitch chat
-      ========================================== -->
+      <!-- =================================================
+           RIGHT YELLOW BINGO STATUS BOX
+      ================================================== -->
 
       <section
-        class="overlay-zone claim-zone"
         id="claimSection"
+        class="overlay-zone claim-zone"
       >
 
         <p
@@ -205,44 +198,11 @@
 
       </section>
 
-
-      <!-- =========================================
-           HOW TO PLAY BOX
-      ========================================== -->
-
-      <section
-        id="rulesPanel"
-        class="rules-overlay hidden"
-        aria-live="polite"
-      >
-
-        <button
-          id="closeRulesButton"
-          class="close-rules"
-          type="button"
-          aria-label="Close how to play"
-        >
-          ×
-        </button>
-
-        <h2>HOW TO PLAY</h2>
-
-        <ol>
-          <li>Watch the stream.</li>
-          <li>Tap a square when it happens.</li>
-          <li>Get 5 in a row in any direction.</li>
-          <li>Type <strong>!bingo</strong> in Twitch chat.</li>
-          <li>Have fun and embrace the chaos!</li>
-        </ol>
-
-      </section>
-
     </div>
 
   </main>
 
 
-  <!-- KEEP YOUR EXISTING JAVASCRIPT FILE -->
   <script src="bingo_app.js"></script>
 
 </body>
