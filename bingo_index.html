@@ -1,377 +1,179 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>The Observatory Bingo</title>
-
-    <link rel="stylesheet" href="bingo_style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Observatory Bingo</title>
+  <link rel="stylesheet" href="bingo_style.css">
 </head>
-
 <body>
 
-    <main class="observatory-app">
+  <main class="bingo-stage" aria-label="The Observatory Bingo game">
+    <div class="game-overlay">
+
+      <!-- USERNAME INPUT -->
+      <section class="overlay-zone username-zone" id="usernameSection">
+        <form id="usernameForm" class="username-form">
+
+          <label class="sr-only" for="usernameInput">
+            Twitch username
+          </label>
+
+          <input
+            id="usernameInput"
+            type="text"
+            autocomplete="off"
+            placeholder="Twitch username"
+            maxlength="30"
+            required
+          >
+
+          <button type="submit" aria-label="Start Bingo">
+            START
+          </button>
+
+        </form>
+
+        <p id="usernameError"
+           class="inline-message"
+           aria-live="polite">
+        </p>
+      </section>
+
 
-        <!-- =========================================
-             COSMIC HEADER
-        ========================================== -->
-
-        <header class="cosmic-header">
-
-            <div class="header-goblin goblin-left">
-                👽✨
-            </div>
-
-            <div class="header-content">
-                <p class="small-cosmic-text">
-                    ✦ THE COSMIC GOBLINS PRESENT ✦
-                </p>
-
-                <h1>
-                    THE
-                    <span>OBSERVATORY</span>
-                </h1>
-
-                <h2>
-                    ✦ BINGO ✦
-                </h2>
-
-                <p class="header-tagline">
-                    Mark the moments. Make the memories.
-                </p>
-
-                <p class="header-subtitle">
-                    COSMIC GOBLINS • CHAOTIC MOMENTS • BRIGHTER SKIES
-                </p>
-            </div>
-
-            <div class="header-goblin goblin-right">
-                🧙‍♀️🌟
-            </div>
-
-        </header>
-
-        <!-- =========================================
-             MAIN THREE-COLUMN LAYOUT
-        ========================================== -->
-
-        <section class="bingo-layout">
-
-            <!-- =====================================
-                 LEFT PANEL
-            ====================================== -->
-
-            <aside class="side-panel left-panel">
-
-                <section id="usernameSection" class="neon-panel setup-panel">
-
-                    <div class="panel-title blue-title">
-                        🪐 ENTER YOUR OBSERVATORY NAME 🪐
-                    </div>
-
-                    <p class="panel-description">
-                        Enter your Twitch username
-                        <br>
-                        to get started!
-                    </p>
-
-                    <form id="usernameForm">
-
-                        <div class="input-wrapper">
-                            <span class="input-icon">♜</span>
-
-                            <input
-                                id="usernameInput"
-                                type="text"
-                                placeholder="Your Twitch username"
-                                autocomplete="off"
-                                required
-                            >
-                        </div>
-
-                        <button
-                            type="submit"
-                            class="neon-button pink-button"
-                        >
-                            🚀 START BINGO
-                        </button>
-
-                    </form>
-
-                    <p
-                        id="usernameError"
-                        class="error-message"
-                        aria-live="polite"
-                    ></p>
-
-                </section>
-
-                <section
-                    id="playerInfo"
-                    class="neon-panel player-panel hidden"
-                >
-
-                    <p class="panel-label">
-                        ✦ PLAYING AS ✦
-                    </p>
-
-                    <p
-                        id="playerNameDisplay"
-                        class="player-name"
-                    >
-                        Stargazer
-                    </p>
-
-                    <div class="panel-stars">
-                        ★　　　　 ★
-                    </div>
-
-                    <p class="card-label">
-                        🪐 CARD
-                        <span id="cardNumber">#1</span>
-                        🪐
-                    </p>
-
-                </section>
-
-                <section class="neon-panel control-panel">
-
-                    <button
-                        id="newCardButton"
-                        type="button"
-                        class="neon-button pink-button"
-                        disabled
-                    >
-                        🔀 NEW CARD
-                        <span>Get a fresh card!</span>
-                    </button>
-
-                    <button
-                        id="clearButton"
-                        type="button"
-                        class="neon-button blue-button"
-                        disabled
-                    >
-                        🔄 CLEAR MARKS
-                        <span>Reset your card!</span>
-                    </button>
-
-                    <button
-                        id="rulesButton"
-                        type="button"
-                        class="neon-button purple-button"
-                    >
-                        📜 HOW TO PLAY
-                        <span>View rules & info!</span>
-                    </button>
-
-                </section>
-
-                <section class="goblin-message neon-panel">
-
-                    <div class="mini-goblin">
-                        👽
-                    </div>
-
-                    <p>
-                        GOOD PEOPLE
-                        <br>
-                        CHAOTIC GAMES
-                        <br>
-                        BRIGHTER SKIES
-                    </p>
-
-                </section>
-
-            </aside>
-
-            <!-- =====================================
-                 CENTER BINGO CARD
-            ====================================== -->
-
-            <section class="bingo-center">
-
-                <div class="bingo-card-frame">
-
-                    <div class="bingo-heading">
-
-                        <span> B </span>
-                        <span> I </span>
-                        <span> N </span>
-                        <span> G </span>
-                        <span> O </span>
-
-                    </div>
-
-                    <p
-                        id="statusMessage"
-                        class="status-message"
-                        aria-live="polite"
-                    >
-                        Enter your Twitch username above to receive your Bingo card.
-                    </p>
-
-                    <div
-                        id="bingoCard"
-                        class="bingo-card"
-                    ></div>
-
-                </div>
-
-                <div class="center-footer-text">
-                    ✦ STAR HAS SPOKEN ✦ THE COUNCIL IS POWERLESS ✦
-                </div>
-
-            </section>
-
-            <!-- =====================================
-                 RIGHT PANEL
-            ====================================== -->
-
-            <aside class="side-panel right-panel">
-
-                <section
-                    id="claimSection"
-                    class="neon-panel claim-section"
-                >
-
-                    <div class="panel-title pink-title">
-                        🏆 CLAIM YOUR WIN 🏆
-                    </div>
-
-                    <p
-                        id="claimStatus"
-                        class="panel-description"
-                    >
-                        Complete a Bingo to unlock your claim!
-                    </p>
-
-                    <button
-                        id="claimButton"
-                        type="button"
-                        class="neon-button claim-button"
-                        disabled
-                    >
-                        🏆 CLAIM YOUR WIN
-                    </button>
-
-                    <div
-                        id="claimResult"
-                        class="claim-result hidden"
-                        aria-live="polite"
-                    >
-
-                        <h3>
-                            Bingo Claim Information
-                        </h3>
-
-                        <p>
-                            <strong>Player:</strong>
-                            <span id="claimedPlayer">—</span>
-                        </p>
-
-                        <p>
-                            <strong>Card Number:</strong>
-                            <span id="claimedCard">—</span>
-                        </p>
-
-                        <p>
-                            <strong>Claim Time:</strong>
-                            <span id="claimedTime">—</span>
-                        </p>
-
-                        <p class="claim-command-label">
-                            Type this in Twitch chat:
-                        </p>
-
-                        <code id="claimChatCommand">
-                            !bingoclaim
-                        </code>
-
-                        <p
-                            id="claimFinalMessage"
-                            class="claim-final-message"
-                        ></p>
-
-                    </div>
-
-                </section>
-
-                <section
-                    id="rulesPanel"
-                    class="neon-panel rules-panel hidden"
-                >
-
-                    <div class="panel-title purple-title">
-                        ⭐ HOW TO PLAY ⭐
-                    </div>
-
-                    <ol class="rules-list">
-                        <li>Watch the stream.</li>
-                        <li>Tap a square when it happens.</li>
-                        <li>Get 5 in a row in any direction.</li>
-                        <li>Click CLAIM YOUR WIN.</li>
-                        <li>Have fun and embrace the chaos!</li>
-                    </ol>
-
-                    <button
-                        id="closeRulesButton"
-                        type="button"
-                        class="close-rules-button"
-                    >
-                        CLOSE RULES
-                    </button>
-
-                </section>
-
-                <section class="neon-panel goblin-side-panel">
-
-                    <div class="side-goblin">
-                        🧙‍♀️✨
-                    </div>
-
-                    <p>
-                        SAME CHAOS
-                        <br>
-                        NEW MEMORIES
-                        <br>
-                        COSMIC MAGIC
-                    </p>
-
-                </section>
-
-            </aside>
-
-        </section>
-
-        <!-- =========================================
-             BOTTOM COSMIC FOOTER
-        ========================================== -->
-
-        <footer class="cosmic-footer">
-
-            <div class="footer-crystal">
-                💎
-            </div>
-
-            <p>
-                ✦ GOOD PEOPLE • CHAOTIC GAMES • BRIGHTER SKIES ✦
-            </p>
-
-            <div class="footer-crystal">
-                💎
-            </div>
-
-        </footer>
-
-    </main>
-
-    <script src="bingo_app.js"></script>
+      <!-- PLAYER INFORMATION -->
+      <section
+        class="overlay-zone player-zone hidden"
+        id="playerInfo"
+      >
+
+        <div id="playerNameDisplay" class="player-name">
+          —
+        </div>
+
+        <div id="cardNumber" class="card-number">
+          #1
+        </div>
+
+      </section>
+
+
+      <!-- LEFT SIDE CONTROLS -->
+      <section class="overlay-zone controls-zone">
+
+        <button
+          id="newCardButton"
+          class="zone-button"
+          type="button"
+          disabled
+          aria-label="Get a new Bingo card"
+        ></button>
+
+        <button
+          id="clearButton"
+          class="zone-button"
+          type="button"
+          disabled
+          aria-label="Clear Bingo marks"
+        ></button>
+
+        <button
+          id="rulesButton"
+          class="zone-button"
+          type="button"
+          aria-label="Show how to play"
+        ></button>
+
+      </section>
+
+
+      <!-- CENTER BINGO CARD -->
+      <section class="overlay-zone card-zone">
+
+        <p
+          id="statusMessage"
+          class="status-message"
+          aria-live="polite"
+        >
+          Enter your Twitch username to begin.
+        </p>
+
+        <div
+          id="bingoCard"
+          class="bingo-card"
+          aria-label="Bingo card"
+        ></div>
+
+      </section>
+
+
+      <!-- RIGHT SIDE CLAIM AREA -->
+      <!-- Claim is done with !bingo in Twitch chat -->
+
+      <section
+        class="overlay-zone claim-zone"
+        id="claimSection"
+      >
+
+        <p
+          id="claimStatus"
+          class="claim-status"
+          aria-live="polite"
+        >
+          Complete a Bingo to unlock your claim.
+        </p>
+
+        <div
+          id="claimResult"
+          class="claim-result hidden"
+          aria-live="polite"
+        >
+
+          <strong id="claimFinalMessage"></strong>
+
+          <span id="claimChatCommand">
+            !bingo
+          </span>
+
+        </div>
+
+      </section>
+
+
+      <!-- HOW TO PLAY PANEL -->
+
+      <section
+        id="rulesPanel"
+        class="rules-overlay hidden"
+        aria-live="polite"
+      >
+
+        <button
+          id="closeRulesButton"
+          class="close-rules"
+          type="button"
+          aria-label="Close how to play"
+        >
+          ×
+        </button>
+
+        <h2>HOW TO PLAY</h2>
+
+        <ol>
+          <li>Watch the stream.</li>
+          <li>Tap a square when it happens.</li>
+          <li>Get 5 in a row in any direction.</li>
+          <li>Type <strong>!bingo</strong> in Twitch chat.</li>
+          <li>Have fun and embrace the chaos!</li>
+        </ol>
+
+      </section>
+
+    </div>
+  </main>
+
+  <script src="bingo_app.js"></script>
 
 </body>
 </html>
