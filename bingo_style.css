@@ -1,16 +1,7 @@
-/* =========================================
+/* =========================================================
    THE OBSERVATORY BINGO
-   FINAL LAYOUT FIX
-
-   FIXES:
-   - Username input over top blue box
-   - NEW CARD over purple arrows box
-   - CLEAR over circular arrows box
-   - HOW TO PLAY over notepad box
-   - Bingo card left alone
-   - All buttons clickable
-   - Smaller bingo text
-========================================= */
+   COMPLETE CSS REPLACEMENT
+========================================================= */
 
 * {
   box-sizing: border-box;
@@ -31,13 +22,13 @@ body {
 
 body {
   display: flex;
-  justify-content: center;
   align-items: flex-start;
+  justify-content: center;
 }
 
-/* =========================================
-   MAIN OBSERVATORY BACKGROUND
-========================================= */
+/* =========================================================
+   BACKGROUND
+========================================================= */
 
 .bingo-stage {
   position: relative;
@@ -48,18 +39,18 @@ body {
   margin: 0;
   padding: 0;
 
+  overflow: hidden;
+
   background-color: #000;
   background-image: url("Bingo_background.png");
   background-position: center top;
   background-repeat: no-repeat;
   background-size: 100% 100%;
-
-  overflow: hidden;
 }
 
-/* =========================================
+/* =========================================================
    MAIN OVERLAY
-========================================= */
+========================================================= */
 
 .game-overlay {
   position: absolute;
@@ -71,131 +62,125 @@ body {
   pointer-events: auto;
 }
 
-/* =========================================
-   HIDDEN CLASS
-========================================= */
+/* =========================================================
+   GENERAL ELEMENTS
+========================================================= */
+
+button,
+input,
+select,
+textarea {
+  font-family: Arial, Helvetica, sans-serif;
+  pointer-events: auto;
+}
+
+button {
+  cursor: pointer;
+}
 
 .hidden {
   display: none !important;
 }
 
-/* =========================================
-   ACCESSIBILITY
-========================================= */
+/* =========================================================
+   USERNAME AREA
+   TOP BLUE BOX ON THE LEFT
+========================================================= */
 
-.sr-only {
+#usernameSection {
   position: absolute;
 
-  width: 1px;
-  height: 1px;
+  left: 5.25%;
+  top: 31.05%;
 
-  padding: 0;
-  margin: -1px;
+  width: 23.45%;
+  height: 6.8%;
 
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-
-  white-space: nowrap;
-  border: 0;
-}
-
-/* =========================================
-   USERNAME INPUT
-   PLACED OVER THE TOP BLUE BOX
-========================================= */
-
-.username-zone {
-  position: absolute;
-
-  left: 5.45%;
-  top: 31.35%;
-
-  width: 23.1%;
-  height: 6.7%;
-
-  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   margin: 0;
   padding: 0;
 
+  z-index: 100;
+
   pointer-events: auto;
 }
 
-.username-form {
+#usernameForm {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 0.7%;
+
+  gap: 5px;
 
   width: 100%;
   height: 100%;
 
   margin: 0;
   padding: 0;
+
+  pointer-events: auto;
 }
 
 #usernameInput {
   width: 77%;
-  height: 78%;
+  height: 72%;
 
   min-width: 0;
 
-  padding: 0 10px;
+  margin: 0;
+  padding: 0 7px;
 
   color: #111;
   background: #fff;
 
-  border: 2px solid #5c8cff;
-  border-radius: 8px;
+  border: 2px solid #628cff;
+  border-radius: 5px;
 
-  font-size: clamp(10px, 0.85vw, 15px);
+  font-size: clamp(8px, 0.72vw, 13px);
   font-weight: 700;
 
   outline: none;
 
-  pointer-events: auto;
   cursor: text;
+  pointer-events: auto;
 }
 
 #usernameInput:focus {
-  border-color: #ff4cff;
-  box-shadow: 0 0 8px #ff4cff;
+  border-color: #ff42ff;
+  box-shadow: 0 0 8px #ff42ff;
 }
 
 #usernameForm button {
   width: 22%;
-  height: 78%;
+  height: 72%;
 
   min-width: 0;
 
+  margin: 0;
   padding: 0;
 
   color: #fff;
-  background: linear-gradient(
-    180deg,
-    #315dff 0%,
-    #09227d 100%
-  );
+  background: #142d91;
 
-  border: 2px solid #83a4ff;
-  border-radius: 8px;
+  border: 2px solid #7295ff;
+  border-radius: 5px;
 
-  font-size: clamp(8px, 0.75vw, 13px);
+  font-size: clamp(7px, 0.65vw, 11px);
   font-weight: 900;
 
   cursor: pointer;
   pointer-events: auto;
-
-  box-shadow:
-    0 0 6px rgba(55, 100, 255, 0.9),
-    inset 0 0 5px rgba(255, 255, 255, 0.2);
 }
 
 #usernameForm button:hover {
   filter: brightness(1.3);
 }
 
-.inline-message {
+#usernameError {
   position: absolute;
 
   left: 0;
@@ -207,87 +192,121 @@ body {
 
   color: #fff;
 
-  font-size: clamp(8px, 0.7vw, 12px);
+  font-size: clamp(7px, 0.6vw, 10px);
   font-weight: 700;
+  line-height: 1;
+
   text-align: center;
-
   text-shadow: 0 0 4px #000;
-}
-
-/* =========================================
-   PLAYER INFORMATION
-========================================= */
-
-.player-zone {
-  position: absolute;
-
-  left: 5.45%;
-  top: 31.35%;
-
-  width: 23.1%;
-  height: 6.7%;
-
-  z-index: 30;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-
-  color: #fff;
 
   pointer-events: none;
 }
 
-.player-name,
-.card-number {
-  font-size: clamp(9px, 0.8vw, 14px);
-  font-weight: 900;
-  text-align: center;
+/* =========================================================
+   CARD NUMBER / PLAYER INFORMATION
+   BOX DIRECTLY BELOW NAME BOX
+========================================================= */
 
+#playerInfo {
+  position: absolute;
+
+  left: 5.25%;
+  top: 37.95%;
+
+  width: 23.45%;
+  height: 6.9%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 3px;
+
+  margin: 0;
+  padding: 0;
+
+  z-index: 90;
+
+  pointer-events: none;
+}
+
+#playerInfo.hidden {
+  display: none !important;
+}
+
+#playerNameDisplay,
+.player-name {
+  max-width: 95%;
+
+  margin: 0;
+
+  color: #fff;
+
+  font-size: clamp(8px, 0.75vw, 13px);
+  font-weight: 900;
+  line-height: 1;
+
+  text-align: center;
+  text-shadow:
+    1px 1px 2px #000,
+    0 0 5px #000;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#cardNumber,
+.card-number {
+  margin: 0;
+
+  color: #fff;
+
+  font-size: clamp(8px, 0.7vw, 12px);
+  font-weight: 900;
+  line-height: 1;
+
+  text-align: center;
   text-shadow:
     1px 1px 2px #000,
     0 0 5px #000;
 }
 
-/* =========================================
-   LEFT CONTROL BUTTON AREA
-========================================= */
+/* =========================================================
+   LEFT CONTROL BUTTONS
+   BOTTOM THREE BOXES
+========================================================= */
 
 .controls-zone {
   position: absolute;
 
-  /*
-    Covers the three lower-left background boxes:
-    1. Purple box with crossing arrows
-    2. Blue box with circular arrows
-    3. Purple box with notepad
-  */
+  left: 5.25%;
+  top: 72.65%;
 
-  left: 5.45%;
-  top: 72.2%;
-
-  width: 23.1%;
-  height: 21.2%;
-
-  z-index: 40;
+  width: 23.45%;
+  height: 24.1%;
 
   display: grid;
+
   grid-template-columns: 1fr;
   grid-template-rows: repeat(3, minmax(0, 1fr));
 
-  gap: 1.8%;
+  gap: 2.1%;
 
   margin: 0;
   padding: 0;
 
+  z-index: 120;
+
   pointer-events: auto;
 }
 
-/* =========================================
-   CONTROL BUTTONS
-========================================= */
+/* =========================================================
+   SIDE BUTTONS
+========================================================= */
 
+.controls-zone .zone-button,
 .zone-button {
   position: relative;
 
@@ -302,81 +321,151 @@ body {
   min-height: 0;
 
   margin: 0;
-  padding: 0 10px;
+  padding: 0;
+
+  color: transparent;
+
+  background: transparent;
+
+  border: 0;
+  border-radius: 12px;
+
+  font-size: 0;
+
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+/* =========================================================
+   SIDE BUTTON LABELS
+========================================================= */
+
+#newCardButton::before {
+  content: "NEW CARD";
+}
+
+#clearButton::before {
+  content: "CLEAR CARD";
+}
+
+#rulesButton::before {
+  content: "HOW TO PLAY";
+}
+
+#newCardButton::before,
+#clearButton::before,
+#rulesButton::before {
+  display: block;
 
   color: #fff;
 
-  background: rgba(0, 20, 85, 0.18);
-
-  border: 2px solid transparent;
-  border-radius: 12px;
-
   font-family: Arial, Helvetica, sans-serif;
-  font-size: clamp(10px, 0.85vw, 15px);
+  font-size: clamp(9px, 0.8vw, 14px);
   font-weight: 900;
+  line-height: 1;
+
   text-align: center;
 
   text-shadow:
     1px 1px 2px #000,
     0 0 5px #000;
 
-  cursor: pointer;
-  pointer-events: auto;
-
-  transition:
-    filter 0.15s ease,
-    background 0.15s ease;
+  pointer-events: none;
 }
 
-/*
-  Keep the background artwork visible.
-  The button itself sits over the artwork.
-*/
-
-.zone-button:hover {
-  background: rgba(40, 80, 255, 0.18);
-  filter: brightness(1.3);
+#newCardButton:hover,
+#clearButton:hover,
+#rulesButton:hover {
+  filter: brightness(1.35);
 }
 
-.zone-button:active {
+#newCardButton:active,
+#clearButton:active,
+#rulesButton:active {
   filter: brightness(1.6);
 }
 
-.zone-button:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
+/* =========================================================
+   BUTTON ICONS / OLD LABELS
+   HIDE THEM SO THEY DO NOT DOUBLE UP
+========================================================= */
+
+#newCardButton .button-icon,
+#newCardButton .button-label,
+#clearButton .button-icon,
+#clearButton .button-label,
+#rulesButton .button-icon,
+#rulesButton .button-label {
+  display: none !important;
 }
 
-/* =========================================
-   CONTROL BUTTON LABELS
-   HTML BUTTONS ARE EMPTY, SO THESE PROVIDE
-   THE LABELS WITHOUT CHANGING THE HTML.
-========================================= */
+/* =========================================================
+   RIGHT YELLOW BINGO READY BOX
+========================================================= */
 
-#newCardButton::before {
-  content: "🎲  NEW CARD";
+#claimSection {
+  position: absolute;
+
+  left: 70.55%;
+  top: 31.65%;
+
+  width: 23.2%;
+  height: 7.0%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 0 2%;
+
+  z-index: 80;
+
+  pointer-events: none;
 }
 
-#clearButton::before {
-  content: "🔄  CLEAR CARD";
+#claimStatus {
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  color: #fff;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(8px, 0.75vw, 13px);
+  font-weight: 900;
+  line-height: 1.1;
+
+  text-align: center;
+
+  text-shadow:
+    1px 1px 2px #000,
+    0 0 5px #000;
+
+  overflow-wrap: anywhere;
 }
 
-#rulesButton::before {
-  content: "📜  HOW TO PLAY";
+#claimStatus.bingo-ready {
+  color: #fff;
 }
 
-/* Prevent duplicate text if any text is added later */
+#claimResult {
+  max-width: 100%;
 
-#newCardButton,
-#clearButton,
-#rulesButton {
-  white-space: nowrap;
+  color: #fff;
+
+  font-size: clamp(8px, 0.7vw, 12px);
+  font-weight: 900;
+  text-align: center;
+
+  pointer-events: none;
 }
 
-/* =========================================
+/* =========================================================
    CENTER BINGO CARD
-   DO NOT CHANGE THIS POSITION
-========================================= */
+   DO NOT CHANGE THE GRID POSITION OR SPACING
+========================================================= */
 
 .card-zone {
   position: absolute;
@@ -390,13 +479,10 @@ body {
   margin: 0;
   padding: 0;
 
-  pointer-events: auto;
   z-index: 20;
-}
 
-/* =========================================
-   BINGO GRID
-========================================= */
+  pointer-events: auto;
+}
 
 .bingo-card {
   position: absolute;
@@ -419,9 +505,9 @@ body {
   pointer-events: auto;
 }
 
-/* =========================================
+/* =========================================================
    BINGO SQUARES
-========================================= */
+========================================================= */
 
 .bingo-square,
 .square,
@@ -468,9 +554,9 @@ body {
   filter: brightness(1.2);
 }
 
-/* =========================================
+/* =========================================================
    BINGO ICONS
-========================================= */
+========================================================= */
 
 .square-icon,
 .bingo-icon {
@@ -493,9 +579,9 @@ body {
   pointer-events: none;
 }
 
-/* =========================================
-   BINGO WORDS
-========================================= */
+/* =========================================================
+   BINGO TEXT
+========================================================= */
 
 .square-text,
 .bingo-text,
@@ -524,7 +610,6 @@ body {
 
   overflow: hidden;
   overflow-wrap: anywhere;
-  word-break: normal;
 
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
@@ -532,9 +617,9 @@ body {
   pointer-events: none;
 }
 
-/* =========================================
+/* =========================================================
    BLANK FREE SPACE
-========================================= */
+========================================================= */
 
 .bingo-square.free-space,
 .square.free-space,
@@ -561,9 +646,9 @@ body {
   display: none !important;
 }
 
-/* =========================================
+/* =========================================================
    MARKED SQUARES
-========================================= */
+========================================================= */
 
 .bingo-square.marked,
 .square.marked,
@@ -594,9 +679,9 @@ body {
   pointer-events: none;
 }
 
-/* =========================================
-   STATUS MESSAGE ABOVE CARD
-========================================= */
+/* =========================================================
+   STATUS MESSAGE
+========================================================= */
 
 .status-message {
   position: absolute;
@@ -623,178 +708,76 @@ body {
   pointer-events: none;
 }
 
-.status-message.bingo {
-  color: #ffe75c;
-  font-size: clamp(9px, 0.85vw, 14px);
-}
+/* =========================================================
+   HOW TO PLAY POPUP
+========================================================= */
 
-/* =========================================
-   RIGHT CLAIM AREA
-========================================= */
-
-.claim-zone {
-  position: absolute;
-
-  left: 70.5%;
-  top: 31.2%;
-
-  width: 23.1%;
-  height: 38.5%;
-
-  z-index: 15;
-
-  pointer-events: none;
-}
-
-.claim-status {
-  position: absolute;
-
-  left: 0;
-  top: 0;
-
-  width: 100%;
-
-  margin: 0;
-
-  color: #fff;
-
-  font-size: clamp(8px, 0.75vw, 13px);
-  line-height: 1.1;
-  text-align: center;
-
-  text-shadow:
-    1px 1px 2px #000,
-    0 0 4px #000;
-}
-
-.claim-result {
-  position: absolute;
-
-  left: 4%;
-  top: 43%;
-
-  width: 92%;
-
-  color: #fff;
-
-  text-align: center;
-
-  pointer-events: none;
-}
-
-.claim-result strong,
-.claim-result span {
-  display: block;
-
-  margin: 4px 0;
-
-  font-size: clamp(9px, 0.85vw, 14px);
-  font-weight: 900;
-}
-
-/* =========================================
-   HOW TO PLAY PANEL
-========================================= */
-
-.rules-overlay {
-  position: absolute;
-
-  left: 70.5%;
-  top: 70.2%;
-
-  width: 23.1%;
-  height: 25%;
-
-  z-index: 100;
-
-  padding: 20px;
-
-  color: #fff;
-
-  background: rgba(0, 0, 25, 0.96);
-
-  border: 3px solid #3975ff;
-  border-radius: 14px;
-
-  box-shadow:
-    0 0 12px #3975ff,
-    inset 0 0 12px rgba(0, 70, 255, 0.35);
-
+#rulesPanel {
+  z-index: 300;
   pointer-events: auto;
 }
 
-.rules-overlay h2 {
-  margin: 0 0 12px 0;
-
-  color: #fff;
-
-  font-size: clamp(13px, 1.2vw, 22px);
-  text-align: center;
-}
-
-.rules-overlay ol {
-  margin: 0;
-  padding-left: 22px;
-}
-
-.rules-overlay li {
-  margin-bottom: 8px;
-
-  font-size: clamp(9px, 0.8vw, 14px);
-  line-height: 1.2;
-}
-
-.close-rules {
-  position: absolute;
-
-  top: 5px;
-  right: 7px;
-
-  width: 25px;
-  height: 25px;
-
-  color: #fff;
-  background: #172b91;
-
-  border: 1px solid #8aa5ff;
-  border-radius: 50%;
-
-  font-size: 18px;
-  font-weight: 900;
-
+#closeRulesButton {
+  pointer-events: auto;
   cursor: pointer;
-  pointer-events: auto;
 }
 
-/* =========================================
-   SMALLER PREVIEW WINDOWS
-========================================= */
+/* =========================================================
+   HIDE CONNECTION MESSAGE
+========================================================= */
+
+.connecting-box,
+.twitch-status-box,
+.connection-status,
+#connection-status,
+#twitch-status {
+  display: none !important;
+}
+
+/* =========================================================
+   DECORATIVE ITEMS MUST NOT BLOCK BUTTONS
+========================================================= */
+
+.bingo-stage::before,
+.bingo-stage::after,
+.background,
+.background-image,
+.decorative,
+.decoration {
+  pointer-events: none;
+}
+
+/* =========================================================
+   SMALL SCREEN ADJUSTMENTS
+========================================================= */
 
 @media (max-width: 900px) {
-  .username-zone {
-    left: 5.45%;
-    top: 31.35%;
-    width: 23.1%;
-    height: 6.7%;
+  #usernameSection {
+    left: 5.25%;
+    top: 31.05%;
+    width: 23.45%;
+    height: 6.8%;
+  }
+
+  #playerInfo {
+    left: 5.25%;
+    top: 37.95%;
+    width: 23.45%;
+    height: 6.9%;
   }
 
   .controls-zone {
-    left: 5.45%;
-    top: 72.2%;
-    width: 23.1%;
-    height: 21.2%;
+    left: 5.25%;
+    top: 72.65%;
+    width: 23.45%;
+    height: 24.1%;
   }
 
-  .card-zone {
-    left: 28.45%;
-    top: 34.25%;
-    width: 42.25%;
-    height: 48.65%;
-  }
-
-  .bingo-card {
-    column-gap: 5px;
-    row-gap: 5px;
+  #claimSection {
+    left: 70.55%;
+    top: 31.65%;
+    width: 23.2%;
+    height: 7%;
   }
 
   .bingo-square,
@@ -815,400 +798,5 @@ body {
   .square-label {
     font-size: clamp(5px, 0.62vw, 8px);
     line-height: 1;
-  }
-
-  .rules-overlay {
-    padding: 12px;
-  }
-}
-/* =====================================================
-   FINAL SIDE BUTTON POSITION FIX
-   DO NOT CHANGE THE BINGO CARD
-===================================================== */
-
-/* Make sure the overlay itself fills the artwork */
-.bingo-stage {
-  position: relative !important;
-  overflow: hidden !important;
-}
-
-.game-overlay {
-  position: absolute !important;
-  inset: 0 !important;
-
-  width: 100% !important;
-  height: 100% !important;
-
-  pointer-events: auto !important;
-}
-
-/* =====================================================
-   USERNAME INPUT
-   MOVED INTO THE TOP BLUE BOX ON THE LEFT
-===================================================== */
-
-#usernameSection.username-zone {
-  position: absolute !important;
-
-  left: 5.35% !important;
-  top: 38.15% !important;
-
-  width: 23.25% !important;
-  height: 6.4% !important;
-
-  display: block !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-
-  z-index: 80 !important;
-
-  pointer-events: auto !important;
-}
-
-#usernameForm.username-form {
-  position: absolute !important;
-  inset: 0 !important;
-
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 5px !important;
-
-  width: 100% !important;
-  height: 100% !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-
-  pointer-events: auto !important;
-}
-
-#usernameInput {
-  width: 76% !important;
-  height: 78% !important;
-
-  min-width: 0 !important;
-
-  margin: 0 !important;
-  padding: 0 8px !important;
-
-  color: #111 !important;
-  background: #fff !important;
-
-  border: 2px solid #648cff !important;
-  border-radius: 6px !important;
-
-  font-size: clamp(9px, 0.8vw, 14px) !important;
-  font-weight: 700 !important;
-
-  pointer-events: auto !important;
-  cursor: text !important;
-}
-
-#usernameForm button {
-  width: 22% !important;
-  height: 78% !important;
-
-  min-width: 0 !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-
-  color: #fff !important;
-  background: linear-gradient(
-    180deg,
-    #376cff 0%,
-    #102b91 100%
-  ) !important;
-
-  border: 2px solid #83a4ff !important;
-  border-radius: 6px !important;
-
-  font-size: clamp(8px, 0.7vw, 12px) !important;
-  font-weight: 900 !important;
-
-  pointer-events: auto !important;
-  cursor: pointer !important;
-}
-
-/* Error text stays out of the artwork */
-#usernameError {
-  position: absolute !important;
-
-  left: 0 !important;
-  top: 105% !important;
-
-  width: 100% !important;
-
-  margin: 0 !important;
-
-  color: #fff !important;
-
-  font-size: clamp(7px, 0.65vw, 11px) !important;
-  line-height: 1 !important;
-  text-align: center !important;
-
-  pointer-events: none !important;
-}
-
-/* =====================================================
-   LEFT BUTTON AREA
-   THREE BUTTONS ARE POSITIONED OVER THE THREE
-   ARTWORK BOXES ON THE LOWER LEFT
-===================================================== */
-
-.controls-zone {
-  position: absolute !important;
-
-  left: 5.35% !important;
-  top: 71.65% !important;
-
-  width: 23.25% !important;
-  height: 25.0% !important;
-
-  display: grid !important;
-
-  grid-template-columns: 1fr !important;
-  grid-template-rows: repeat(3, minmax(0, 1fr)) !important;
-
-  column-gap: 0 !important;
-  row-gap: 2.8% !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-
-  z-index: 90 !important;
-
-  pointer-events: auto !important;
-}
-
-/* =====================================================
-   ALL THREE SIDE BUTTONS
-===================================================== */
-
-.controls-zone .zone-button {
-  position: relative !important;
-
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-
-  width: 100% !important;
-  height: 100% !important;
-
-  min-width: 0 !important;
-  min-height: 0 !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-
-  color: #fff !important;
-
-  /*
-    Transparent so the original neon artwork
-    remains visible behind each button.
-  */
-
-  background: transparent !important;
-
-  border: 2px solid transparent !important;
-  border-radius: 12px !important;
-
-  font-family: Arial, Helvetica, sans-serif !important;
-  font-size: clamp(9px, 0.8vw, 14px) !important;
-  font-weight: 900 !important;
-  line-height: 1 !important;
-  text-align: center !important;
-
-  text-shadow:
-    1px 1px 2px #000,
-    0 0 5px #000 !important;
-
-  cursor: pointer !important;
-  pointer-events: auto !important;
-}
-
-/* =====================================================
-   SIDE BUTTON LABELS
-===================================================== */
-
-#newCardButton::before {
-  content: "🎲  NEW CARD" !important;
-}
-
-#clearButton::before {
-  content: "🔄  CLEAR CARD" !important;
-}
-
-#rulesButton::before {
-  content: "📜  HOW TO PLAY" !important;
-}
-
-/* Keep the button text from being too large */
-#newCardButton,
-#clearButton,
-#rulesButton {
-  white-space: nowrap !important;
-}
-
-/* Make sure the buttons work after the username is entered */
-#newCardButton:not(:disabled),
-#clearButton:not(:disabled),
-#rulesButton:not(:disabled) {
-  pointer-events: auto !important;
-  cursor: pointer !important;
-}
-
-/* Disabled card buttons are still visible but muted */
-#newCardButton:disabled,
-#clearButton:disabled {
-  opacity: 0.55 !important;
-}
-
-/* =====================================================
-   PLAYER INFO
-   KEEPS IT INSIDE THE SECOND LEFT PURPLE BOX
-===================================================== */
-
-#playerInfo.player-zone {
-  position: absolute !important;
-
-  left: 5.35% !important;
-  top: 45.0% !important;
-
-  width: 23.25% !important;
-  height: 6.0% !important;
-
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
-
-  z-index: 70 !important;
-
-  pointer-events: none !important;
-}
-
-#playerInfo.hidden {
-  display: none !important;
-}
-
-.player-name,
-.card-number {
-  color: #fff !important;
-
-  font-size: clamp(8px, 0.75vw, 13px) !important;
-  font-weight: 900 !important;
-  text-align: center !important;
-
-  text-shadow:
-    1px 1px 2px #000,
-    0 0 5px #000 !important;
-}
-
-/* =====================================================
-   KEEP BINGO CARD POSITION EXACTLY AS IT IS
-===================================================== */
-
-.card-zone {
-  position: absolute !important;
-
-  left: 28.45% !important;
-  top: 34.25% !important;
-
-  width: 42.25% !important;
-  height: 48.65% !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-
-  z-index: 20 !important;
-  pointer-events: auto !important;
-}
-
-/* Preserve the current correct card spacing */
-.bingo-card {
-  position: absolute !important;
-  inset: 0 !important;
-
-  display: grid !important;
-
-  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
-  grid-template-rows: repeat(5, minmax(0, 1fr)) !important;
-
-  column-gap: 8px !important;
-  row-gap: 8px !important;
-
-  width: 100% !important;
-  height: 100% !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-
-  pointer-events: auto !important;
-}
-
-/* =====================================================
-   FREE SPACE STAYS BLANK
-===================================================== */
-
-.bingo-square.free-space *,
-.square.free-space *,
-.free-space * {
-  display: none !important;
-}
-
-.bingo-square.free-space,
-.square.free-space,
-.free-space {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-
-  cursor: pointer !important;
-  pointer-events: auto !important;
-}
-
-/* =====================================================
-   HOW-TO-PLAY POPUP
-===================================================== */
-
-#rulesPanel.rules-overlay {
-  z-index: 200 !important;
-  pointer-events: auto !important;
-}
-
-#closeRulesButton {
-  pointer-events: auto !important;
-  cursor: pointer !important;
-}
-
-/* =====================================================
-   RESPONSIVE OVERRIDE
-===================================================== */
-
-@media (max-width: 900px) {
-  #usernameSection.username-zone {
-    left: 5.35% !important;
-    top: 38.15% !important;
-    width: 23.25% !important;
-    height: 6.4% !important;
-  }
-
-  .controls-zone {
-    left: 5.35% !important;
-    top: 71.65% !important;
-    width: 23.25% !important;
-    height: 25.0% !important;
-
-    row-gap: 2.8% !important;
-  }
-
-  .card-zone {
-    left: 28.45% !important;
-    top: 34.25% !important;
-    width: 42.25% !important;
-    height: 48.65% !important;
   }
 }
