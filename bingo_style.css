@@ -611,3 +611,258 @@ body {
   }
 
 }
+
+
+/* =========================================
+   OBSERVATORY BINGO
+   COMMUNITY NIGHT OVERLAY FIX
+   BACKGROUND DESIGN: 1200 x 900
+========================================= */
+
+
+/* =========================================
+   BUTTON TEXT
+========================================= */
+
+.zone-button {
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 4px;
+
+  padding: 8px;
+
+  text-align: center;
+
+  line-height: 1.1;
+
+  font-family: inherit;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+}
+
+
+/* ICONS */
+
+.zone-button .button-icon {
+
+  display: block;
+
+  font-size: 30px;
+
+  line-height: 1;
+
+}
+
+
+/* TEXT */
+
+.zone-button .button-label {
+
+  display: block;
+
+  font-size: 16px;
+
+  letter-spacing: 0.5px;
+
+}
+
+
+/* DISABLED BUTTONS */
+
+.zone-button:disabled {
+
+  opacity: 0.45;
+
+  cursor: not-allowed;
+
+}
+
+
+/* =========================================
+   BINGO CARD FIT
+========================================= */
+
+.bingo-card {
+
+  width: 100%;
+
+  height: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(5, 1fr);
+
+  grid-template-rows: repeat(5, 1fr);
+
+  gap: 6px;
+
+  box-sizing: border-box;
+
+}
+
+
+/* =========================================
+   BINGO SQUARES
+========================================= */
+
+.bingo-square {
+
+  min-width: 0;
+
+  min-height: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  padding: 4px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+
+}
+
+
+/* ICON */
+
+.bingo-square .square-icon {
+
+  display: block;
+
+  font-size: clamp(16px, 2vw, 28px);
+
+  line-height: 1.1;
+
+}
+
+
+/* TEXT */
+
+.bingo-square .square-text {
+
+  display: block;
+
+  font-size: clamp(9px, 1.05vw, 15px);
+
+  line-height: 1.1;
+
+  overflow-wrap: anywhere;
+
+  word-break: normal;
+
+}
+
+
+/* =========================================
+   STATUS MESSAGE
+========================================= */
+
+.status-message {
+
+  margin: 0;
+
+  padding: 4px 10px;
+
+  text-align: center;
+
+  font-size: 14px;
+
+  line-height: 1.2;
+
+  max-width: 100%;
+
+  box-sizing: border-box;
+
+}
+
+
+/* =========================================
+   CLAIM TEXT
+========================================= */
+
+.claim-status {
+
+  margin: 0;
+
+  text-align: center;
+
+  line-height: 1.2;
+
+  font-size: 16px;
+
+}
+
+
+/* =========================================
+   HOW TO PLAY
+========================================= */
+
+.rules-overlay {
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+
+}
+
+
+/* =========================================
+   OBS RESPONSIVE SCALING
+========================================= */
+
+html,
+body {
+
+  margin: 0;
+
+  padding: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  overflow: hidden;
+
+}
+
+.bingo-stage {
+
+  width: 100%;
+
+  height: 100%;
+
+  position: relative;
+
+}
+
+.game-overlay {
+
+  width: 100%;
+
+  height: 100%;
+
+  position: relative;
+
+}
+
