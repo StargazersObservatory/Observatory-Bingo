@@ -1,9 +1,10 @@
 "use strict";
 
 /* =========================================
-   OBSERVATORY TWITCH BINGO
-   Username required before using the card
+   THE OBSERVATORY BINGO
+   Complete fixed JavaScript
 ========================================= */
+
 
 /* =========================================
    PAGE ELEMENTS
@@ -15,28 +16,33 @@ const cardNumberDisplay = document.getElementById("cardNumber");
 
 const newCardButton = document.getElementById("newCardButton");
 const clearButton = document.getElementById("clearButton");
+
 const rulesButton = document.getElementById("rulesButton");
 const closeRulesButton = document.getElementById("closeRulesButton");
 const rulesPanel = document.getElementById("rulesPanel");
 
+
 /* =========================================
-   FIXED USERNAME ELEMENT IDs
+   USERNAME ELEMENTS
 ========================================= */
 
 const playerForm = document.getElementById("usernameForm");
 const twitchUsernameInput = document.getElementById("usernameInput");
 const usernameMessage = document.getElementById("usernameError");
+
 const playerSetup = document.getElementById("usernameSection");
 const playerInfo = document.getElementById("playerInfo");
 const activeUsername = document.getElementById("playerNameDisplay");
 
+
 /* =========================================
-   BINGO CLAIM ELEMENTS
+   CLAIM ELEMENTS
 ========================================= */
 
-const bingoClaimSection = document.getElementById("bingoClaimSection");
-const bingoClaimButton = document.getElementById("bingoClaimButton");
+const claimSection = document.getElementById("claimSection");
+const claimButton = document.getElementById("claimButton");
 const claimMessage = document.getElementById("claimMessage");
+
 
 /* =========================================
    PLAYER STATE
@@ -45,6 +51,15 @@ const claimMessage = document.getElementById("claimMessage");
 let playerUsername = "";
 let playerHasEnteredName = false;
 let playerHasBingo = false;
+
+
+/* =========================================
+   CARD STATE
+========================================= */
+
+let cardNumber = 1;
+let currentCard = [];
+
 
 /* =========================================
    BINGO ITEMS
@@ -253,12 +268,6 @@ const bingoItems = [
     }
 ];
 
-/* =========================================
-   CARD STATE
-========================================= */
-
-let cardNumber = 1;
-let currentCard = [];
 
 /* =========================================
    HELPER FUNCTIONS
@@ -279,6 +288,7 @@ function shuffle(array) {
     return copy;
 }
 
+
 function showUsernameRequiredMessage() {
     if (usernameMessage) {
         usernameMessage.textContent =
@@ -289,6 +299,7 @@ function showUsernameRequiredMessage() {
         twitchUsernameInput.focus();
     }
 }
+
 
 function setCardControlsEnabled(enabled) {
     if (newCardButton) {
@@ -303,6 +314,39 @@ function setCardControlsEnabled(enabled) {
         bingoCard.classList.toggle("card-locked", !enabled);
     }
 }
+
+
+function hideClaimButton() {
+    if (claimSection) {
+        claimSection.classList.add("hidden");
+    }
+
+    if (claimMessage) {
+        claimMessage.textContent = "";
+    }
+
+    if (claimButton) {
+        claimButton.disabled = false;
+        claimButton.textContent = "🏆 CLAIM YOUR WIN";
+    }
+}
+
+
+function showClaimButton() {
+    if (!claimSection || !claimButton) {
+        return;
+    }
+
+    claimSection.classList.remove("hidden");
+
+    claimButton.disabled = false;
+    claimButton.textContent = "🏆 CLAIM YOUR WIN";
+
+    if (claimMessage) {
+        claimMessage.textContent = "";
+    }
+}
+
 
 /* =========================================
    CREATE NEW CARD
@@ -326,13 +370,7 @@ function createNewCard() {
 
     playerHasBingo = false;
 
-    if (bingoClaimSection) {
-        bingoClaimSection.classList.add("hidden");
-    }
-
-    if (claimMessage) {
-        claimMessage.textContent = "";
-    }
+    hideClaimButton();
 
     renderCard();
 
@@ -348,6 +386,7 @@ function createNewCard() {
     }
 }
 
+
 /* =========================================
    RENDER CARD
 ========================================= */
@@ -359,7 +398,7 @@ function renderCard() {
 
     bingoCard.innerHTML = "";
 
-    currentCard.forEach(function (item) {
+    currentCard.forEach(function (item, index) {
         const square = document.createElement("button");
 
         square.type = "button";
@@ -412,6 +451,7 @@ function renderCard() {
     });
 }
 
+
 /* =========================================
    GET MARKED SQUARES
 ========================================= */
@@ -427,6 +467,7 @@ function getMarkedSquares() {
         return square.dataset.marked === "true";
     });
 }
+
 
 /* =========================================
    CHECK FOR BINGO
@@ -476,9 +517,7 @@ function checkForBingo() {
             statusMessage.classList.add("bingo");
         }
 
-        if (bingoClaimSection) {
-            bingoClaimSection.classList.remove("hidden");
-        }
+        showClaimButton();
 
         return;
     }
@@ -493,10 +532,9 @@ function checkForBingo() {
         statusMessage.classList.remove("bingo");
     }
 
-    if (bingoClaimSection) {
-        bingoClaimSection.classList.add("hidden");
-    }
+    hideClaimButton();
 }
+
 
 /* =========================================
    CLEAR MARKS
@@ -522,29 +560,28 @@ function clearMarks() {
 
     playerHasBingo = false;
 
+    hideClaimButton();
+
     if (statusMessage) {
         statusMessage.textContent =
             "Your marks have been cleared.";
 
         statusMessage.classList.remove("bingo");
     }
-
-    if (bingoClaimSection) {
-        bingoClaimSection.classList.add("hidden");
-    }
-
-    if (claimMessage) {
-        claimMessage.textContent = "";
-    }
 }
+
 
 /* =========================================
    PLAYER NAME SUBMISSION
 ========================================= */
 
-if (playerForm && twitchUsernameInput) {
+if (playerForm) {
     playerForm.addEventListener("submit", function (event) {
         event.preventDefault();
+
+        if (!twitchUsernameInput) {
+            return;
+        }
 
         const enteredName =
             twitchUsernameInput.value.trim();
@@ -569,42 +606,35 @@ if (playerForm && twitchUsernameInput) {
             return;
         }
 
-        /* Save username */
         playerUsername = enteredName;
         playerHasEnteredName = true;
 
-        /* Display username */
         if (activeUsername) {
             activeUsername.textContent = playerUsername;
         }
 
-        /* Hide username form */
         if (playerSetup) {
             playerSetup.classList.add("hidden");
         }
 
-        /* Show player information */
         if (playerInfo) {
             playerInfo.classList.remove("hidden");
         }
 
-        /* Clear error message */
         if (usernameMessage) {
             usernameMessage.textContent = "";
         }
 
-        /* Unlock card controls */
         setCardControlsEnabled(true);
 
-        /* Create the player's card */
         cardNumber = 1;
+
+        hideClaimButton();
+
         createNewCard();
     });
-} else {
-    console.error(
-        "Bingo username form was not found. Check that the HTML uses usernameForm and usernameInput."
-    );
 }
+
 
 /* =========================================
    NEW CARD BUTTON
@@ -618,9 +648,11 @@ if (newCardButton) {
         }
 
         cardNumber++;
+
         createNewCard();
     });
 }
+
 
 /* =========================================
    CLEAR BUTTON
@@ -632,6 +664,7 @@ if (clearButton) {
     });
 }
 
+
 /* =========================================
    RULES PANEL
 ========================================= */
@@ -642,18 +675,20 @@ if (rulesButton && rulesPanel) {
     });
 }
 
+
 if (closeRulesButton && rulesPanel) {
     closeRulesButton.addEventListener("click", function () {
         rulesPanel.classList.add("hidden");
     });
 }
 
+
 /* =========================================
-   BINGO CLAIM BUTTON
+   CLAIM YOUR WIN BUTTON
 ========================================= */
 
-if (bingoClaimButton) {
-    bingoClaimButton.addEventListener("click", function () {
+if (claimButton) {
+    claimButton.addEventListener("click", function () {
         if (!playerHasEnteredName) {
             showUsernameRequiredMessage();
             return;
@@ -670,10 +705,14 @@ if (bingoClaimButton) {
 
         if (claimMessage) {
             claimMessage.textContent =
-                `🎉 ${playerUsername}, type !bingoclaim in Twitch chat!`;
+                `🎉 ${playerUsername}, your win is ready! Type !bingoclaim in Twitch chat.`;
         }
+
+        claimButton.disabled = true;
+        claimButton.textContent = "✅ WIN READY";
     });
 }
+
 
 /* =========================================
    INITIAL LOCK STATE
@@ -681,15 +720,13 @@ if (bingoClaimButton) {
 
 setCardControlsEnabled(false);
 
+hideClaimButton();
+
 if (bingoCard) {
     bingoCard.innerHTML = "";
 }
 
 if (statusMessage) {
     statusMessage.textContent =
-        "Enter your Twitch username above to receive your Bingo card.";
-}
-
-if (bingoClaimSection) {
-    bingoClaimSection.classList.add("hidden");
+        "Enter your username above to receive your Bingo card.";
 }
