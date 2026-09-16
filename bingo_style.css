@@ -1,6 +1,10 @@
 /* =========================================
    THE OBSERVATORY BINGO
-   SPACING + SMALLER TEXT + BLANK FREE SPACE
+   COMPLETE FIX
+   - Buttons clickable
+   - Bingo spacing improved
+   - Smaller words
+   - Blank free space
 ========================================= */
 
 * {
@@ -13,8 +17,10 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+
   overflow: hidden;
   background: #000;
+
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -25,7 +31,7 @@ body {
 }
 
 /* =========================================
-   BACKGROUND STAGE
+   MAIN BACKGROUND
 ========================================= */
 
 .bingo-stage {
@@ -33,6 +39,9 @@ body {
 
   width: min(100vw, 1402px);
   aspect-ratio: 1402 / 1122;
+
+  margin: 0;
+  padding: 0;
 
   background-color: #000;
   background-image: url("Bingo_background.png");
@@ -45,6 +54,9 @@ body {
 
 /* =========================================
    OVERLAY
+   IMPORTANT:
+   pointer-events MUST be auto so buttons
+   and bingo squares can be clicked.
 ========================================= */
 
 .game-overlay {
@@ -54,7 +66,7 @@ body {
   width: 100%;
   height: 100%;
 
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 /* =========================================
@@ -64,22 +76,20 @@ body {
 .card-zone {
   position: absolute;
 
-  /*
-    Slightly smaller than the background area
-    so the buttons do not touch each other.
-  */
-
   left: 28.45%;
   top: 34.25%;
+
   width: 42.25%;
   height: 48.65%;
 
-  padding: 0;
   margin: 0;
+  padding: 0;
+
+  pointer-events: auto;
 }
 
 /* =========================================
-   GRID
+   BINGO GRID
 ========================================= */
 
 .bingo-card {
@@ -91,18 +101,16 @@ body {
   grid-template-columns: repeat(5, minmax(0, 1fr));
   grid-template-rows: repeat(5, minmax(0, 1fr));
 
-  /*
-    Increased spacing between all buttons.
-  */
-
   column-gap: 8px;
   row-gap: 8px;
 
   width: 100%;
   height: 100%;
 
-  padding: 0;
   margin: 0;
+  padding: 0;
+
+  pointer-events: auto;
 }
 
 /* =========================================
@@ -110,7 +118,8 @@ body {
 ========================================= */
 
 .bingo-square,
-.square {
+.square,
+.bingo-card button {
   position: relative;
 
   display: flex;
@@ -124,28 +133,43 @@ body {
   width: 100%;
   height: 100%;
 
-  /*
-    Smaller inner padding prevents text
-    from crowding the edges.
-  */
-
-  padding: 3px 5px;
   margin: 0;
+  padding: 3px 5px;
 
-  border-radius: 10px;
-  overflow: hidden;
-
-  text-align: center;
-  line-height: 1.05;
+  color: #fff;
 
   background: rgba(0, 22, 95, 0.78);
+
   border: 2px solid rgba(70, 110, 255, 0.95);
+  border-radius: 10px;
+
+  text-align: center;
+  line-height: 1.03;
+
+  overflow: hidden;
+
+  cursor: pointer;
+  pointer-events: auto;
 
   box-shadow:
     0 0 5px rgba(0, 85, 255, 0.9),
     inset 0 0 8px rgba(0, 0, 255, 0.3);
+}
 
-  pointer-events: auto;
+/* =========================================
+   HOVER EFFECT
+========================================= */
+
+.bingo-square:hover,
+.square:hover,
+.bingo-card button:hover,
+.zone-button:hover,
+.action-button:hover {
+  filter: brightness(1.25);
+
+  box-shadow:
+    0 0 10px rgba(80, 130, 255, 1),
+    inset 0 0 10px rgba(0, 0, 255, 0.4);
 }
 
 /* =========================================
@@ -169,10 +193,12 @@ body {
 
   white-space: nowrap;
   overflow: hidden;
+
+  pointer-events: none;
 }
 
 /* =========================================
-   SMALLER WORDS
+   SMALL TEXT
 ========================================= */
 
 .square-text,
@@ -188,17 +214,12 @@ body {
 
   color: #fff;
 
-  /*
-    Smaller than the previous version.
-  */
-
   font-size: clamp(6px, 0.53vw, 9px);
   font-weight: 800;
   line-height: 1.03;
   letter-spacing: -0.25px;
 
   text-align: center;
-
   text-shadow:
     1px 1px 0 #1724a5,
     -1px -1px 0 #1724a5,
@@ -210,46 +231,24 @@ body {
 
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
+
+  pointer-events: none;
 }
 
-/* Prevent any child text from becoming too large */
+/* Make sure text inside buttons cannot block clicks */
 
 .bingo-square span,
-.square span {
+.square span,
+.bingo-card button span {
   max-width: 100%;
   font-size: inherit;
   line-height: inherit;
+  pointer-events: none;
 }
 
 /* =========================================
    BLANK FREE SPACE
 ========================================= */
-
-/*
-  This hides the icon and all words in the
-  center square, leaving only a clear button.
-*/
-
-.bingo-square.free-space,
-.square.free-space,
-.free-space {
-  background: rgba(35, 0, 90, 0.9);
-  border-color: #ff49ff;
-
-  box-shadow:
-    0 0 9px #ff28ff,
-    inset 0 0 12px rgba(255, 0, 255, 0.4);
-}
-
-/* Hide every visible item inside FREE SPACE */
-
-.bingo-square.free-space *,
-.square.free-space *,
-.free-space * {
-  display: none !important;
-}
-
-/* Keep the free-space button itself visible */
 
 .bingo-square.free-space,
 .square.free-space,
@@ -257,10 +256,29 @@ body {
   display: flex !important;
   align-items: center;
   justify-content: center;
+
+  background: rgba(35, 0, 90, 0.9);
+
+  border-color: #ff49ff;
+
+  box-shadow:
+    0 0 9px #ff28ff,
+    inset 0 0 12px rgba(255, 0, 255, 0.4);
+
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+/* Hide icon and words only inside free space */
+
+.bingo-square.free-space *,
+.square.free-space *,
+.free-space * {
+  display: none !important;
 }
 
 /* =========================================
-   CLAIMED SQUARES
+   CLAIMED / MARKED SQUARES
 ========================================= */
 
 .bingo-square.claimed,
@@ -288,16 +306,38 @@ body {
   color: #9affaa;
   font-size: 12px;
   font-weight: 900;
+
+  pointer-events: none;
 }
 
 /* =========================================
-   OTHER BUTTONS
+   ALL OTHER BUTTONS
 ========================================= */
 
-.zone-button {
+button,
+.zone-button,
+.action-button,
+input,
+select,
+textarea {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+button {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Top and side control buttons */
+
+.zone-button,
+.action-button {
+  position: relative;
+
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 5px;
 
   min-width: 0;
   min-height: 0;
@@ -315,21 +355,47 @@ body {
   line-height: 1.05;
   text-align: center;
 
-  box-shadow: 0 0 6px rgba(60, 100, 255, 0.8);
+  box-shadow:
+    0 0 6px rgba(60, 100, 255, 0.8);
+
+  pointer-events: auto;
 }
 
 .button-icon {
   font-size: clamp(12px, 1.1vw, 18px);
   line-height: 1;
+
+  pointer-events: none;
 }
 
 .button-label {
   font-size: clamp(8px, 0.65vw, 11px);
   line-height: 1.05;
+
+  pointer-events: none;
 }
 
 /* =========================================
-   HEADER AND INSTRUCTIONS
+   INPUT FIELDS
+========================================= */
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="password"] {
+  position: relative;
+  z-index: 50;
+
+  pointer-events: auto;
+
+  color: #000;
+  background: #fff;
+
+  cursor: text;
+}
+
+/* =========================================
+   HEADER / TITLE
 ========================================= */
 
 .title,
@@ -339,6 +405,10 @@ body {
   line-height: 1;
   text-align: center;
 }
+
+/* =========================================
+   INSTRUCTIONS
+========================================= */
 
 .subtitle,
 .instructions,
@@ -365,7 +435,7 @@ body {
 }
 
 /* =========================================
-   HIDE CONNECTION BOX
+   CONNECTION BOX HIDDEN
 ========================================= */
 
 .connecting-box,
@@ -377,13 +447,27 @@ body {
 }
 
 /* =========================================
-   SMALLER PREVIEW WINDOWS
+   PREVENT DECORATIVE ELEMENTS FROM BLOCKING
+========================================= */
+
+.background,
+.background-image,
+.decorative,
+.decoration,
+.bingo-stage::before,
+.bingo-stage::after {
+  pointer-events: none;
+}
+
+/* =========================================
+   SMALLER OBS PREVIEW
 ========================================= */
 
 @media (max-width: 900px) {
   .card-zone {
     left: 28.45%;
     top: 34.25%;
+
     width: 42.25%;
     height: 48.65%;
   }
@@ -394,10 +478,11 @@ body {
   }
 
   .bingo-square,
-  .square {
+  .square,
+  .bingo-card button {
     padding: 2px 3px;
-    border-radius: 8px;
     border-width: 1px;
+    border-radius: 8px;
   }
 
   .square-icon,
@@ -410,6 +495,7 @@ body {
   .square-label {
     font-size: clamp(5px, 0.62vw, 8px);
     line-height: 1;
+
     -webkit-line-clamp: 4;
   }
 }
